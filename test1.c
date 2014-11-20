@@ -1,7 +1,7 @@
 #include <mlx.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
+#include "libft/includes/libft.h"
 
 typedef struct	s_env
 {
