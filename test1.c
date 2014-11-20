@@ -37,6 +37,19 @@ int		key_hook(int keycode, t_env *e)
 	return (0);
 }
 
+int		mouse_hook(int buttons, int x, int y, t_env *e)
+{
+	write(1, "key: ", 5);
+	ft_putnbr(buttons);
+	ft_putstr(" (");
+	ft_putnbr(x);
+	ft_putchar(':');
+	ft_putnbr(y);
+	ft_putchar(')');
+	ft_putchar('\n');
+	return (0);
+}
+
 int		expose_hook(t_env *e)
 {
 	draw_square(e->mlx, e->win);
@@ -51,6 +64,7 @@ int		main(void)
 	e.win = mlx_new_window(e.mlx, 400, 400, "test1");
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
+	mlx_mouse_hook(e.win, mouse_hook, &e);
 	mlx_loop(e.mlx);
 	return (0);
 }
