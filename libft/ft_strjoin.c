@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 18:26:56 by etheodor          #+#    #+#             */
-/*   Updated: 2014/11/16 12:17:09 by etheodor         ###   ########.fr       */
+/*   Updated: 2014/11/11 17:27:32 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ char			*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	s3 = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	s3 = (char*)malloc(sizeof(char) * ft_strlen((char*)s1) + \
+ft_strlen((char*)s2) + 1);
 	i = 0;
-	while (s1[i])
+	j = 0;
+	while (i < (int)ft_strlen((char*)s1))
 	{
 		s3[i] = s1[i];
 		i++;
 	}
-	j = 0;
-	while (s2[j])
+	while (j < (int)ft_strlen(s3))
 	{
 		s3[i] = s2[j];
 		i++;
