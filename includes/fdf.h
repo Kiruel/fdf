@@ -22,9 +22,13 @@ typedef struct	s_env
 	void *mlx;
 	void *win;
 }				t_env;
+
 typedef struct 	s_data
 {
-	int	*map;
+	int	x;
+	int y;
+	int z;
+	struct s_data *next;
 }				t_data;
 
 int			get_next_line(int const fd, char **line);
