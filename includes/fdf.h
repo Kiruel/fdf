@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #ifndef FDF_H
 # define FDF_H
-# include <mlx.h>
+//# include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/includes/libft.h"
@@ -24,7 +24,7 @@ typedef struct	s_env
 }				t_env;
 typedef struct 	s_data
 {
-	int	**map;
+	int	*map;
 }				t_data;
 
 int			get_next_line(int const fd, char **line);

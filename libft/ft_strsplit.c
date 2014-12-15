@@ -13,75 +13,47 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void	ft_complete(char ***tab, char const *s, char c)
+static int		ft_count(const char *s, char c)
 {
 	int		i;
-	int		j;
-	int		k;
+	int 	counter;
 
+	counter = 0;
 	i = 0;
-	j = 0;
-	k = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		k = 0;
-		while (s[i] == c)
-			i++;
-		while (s[i] != c)
-		{
-			tab[0][j][k] = s[i];
-			k++;
-			i++;
-		}
-		tab[0][j][k] = '\0';
+		if (s[i] != c && (s[i - 1] == c || i == 0))
+			counter++;
 		i++;
-		j++;
 	}
+	return (counter);
 }
 
-void	ft_malloc_tab(char ***tab, char const *s, char c)
+char		**ft_strsplit(const char *s, char c)
 {
-	int		i;
-	int		j;
-	int		size;
+	char		**ret;
+	size_t		i;
+	size_t		j;
+	size_t		len;
 
+	if (!s || !c)
+		return (0);
+	ret = ft_memalloc(sizeof(char *) * (ft_count(s, c) + 1));
 	i = 0;
 	j = 0;
-	size = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		while (s[i] == c)
+		if (s[i] == c)
 			i++;
-		while (s[i] != c)
+		else
 		{
-			size++;
-			i++;
+			len = 0;
+			while (s[i + len] && (s[i + len] != c))
+				len++;
+			ret[j++] = ft_strsub(s, i, len);
+			i = i + len;
 		}
-		tab[0][j] = (char*)ft_memalloc(sizeof(char) * size + 1);
-		j++;
-		i++;
 	}
-}
-
-char	**ft_strsplit(char const *s, char c)
-{
-	int		i;
-	int		match;
-	char	**tab;
-
-	i = 0;
-	match = 0;
-	while (s[i] != '\0')
-	{
-		while (s[i] != '\0' && s[i] == c)
-			i++;
-		match++;
-		while (s[i] != '\0' && s[i] != c)
-			i++;
-		i++;
-	}
-	tab = (char**)ft_memalloc(sizeof(char*) * match + 1);
-	ft_malloc_tab(&tab, s, c);
-	ft_complete(&tab, s, c);
-	return (tab);
+	ret[j] = NULL;
+	return (ret);
 }

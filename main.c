@@ -14,39 +14,49 @@
 
 int main(int ac, char **av)
 {
-	
+	t_data 	*list;
 	char 	*line;
 	char 	**map_char;
 	int 	fd;
-	// int 	i;
+	int 	i;
 
+	list = NULL;
 	if (ac < 2)
 		return (0);
 	line = NULL;
 	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr("opent() failed\n");
+		return (0);
+	}
 	if (get_next_line(fd, &line) == -1)
 		return (0);
 	map_char = ft_strsplit(line, ' ');
-	// ft_putendl(line);
-	ft_putstr(map_char[18]);
-	// i = 0;
-	// while (map_char[i] != '\0')
-	// {
-	// 	ft_putendl(map_char[i]);
-	// 	i++;
-	// }
-
-
-
-
-
-
-/*	while (get_next_line(fd, &line))
+	list = (t_data*)malloc(sizeof(t_data));
+	i = 0;
+	while (map_char[i])
+	{
+		list->map[i] = ft_atoi(map_char[i]);		
+	}
+	i = 0;
+	while (get_next_line(fd, &line))
 	{	
 		// map_char[i] = ft_strsplit(line, ' ');
 		ft_putendl(line);
 		i++;
+	}
+/*	while (map_char[i] != '\0')
+	{
+		ft_putendl(map_char[i]);
+		i++;
 	}*/
+	if (close(fd) == -1)
+	{
+		ft_putstr("close() failed\n");
+		return (1);
+	}
+
 	return (0);
 }
 
