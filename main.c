@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "includes/fdf.h"
+#include "includes/fdf.h"
 
 void	draw_square(void *mlx, void *win)
 {
@@ -32,6 +32,8 @@ void	draw_square(void *mlx, void *win)
 
 int		key_hook(int keycode, t_env *e)
 {
+	e++;
+	e--;
 	if (keycode == 65307)
 		exit(0);
 	write(1, "key: ", 5);
@@ -41,6 +43,8 @@ int		key_hook(int keycode, t_env *e)
 }
 int		mouse_hook(int buttons, int x, int y, t_env *e)
 {
+	e++;
+	e--;
 	write(1, "key: ", 5);
 	ft_putnbr(buttons);
 	ft_putstr(" (");
@@ -58,7 +62,7 @@ int		expose_hook(t_env *e)
 	return (0);
 }
 
-int main()
+int main(void)
 {
 	t_env e;
 

@@ -12,31 +12,41 @@
 
 NAME = fdf
 
-CFLAG = -Wall -Werror -Wextra 
+CFLAG = -Wall -Werror -Wextra
 
-SOURCE = main.c
+MINILIBX = -L/usr/x11/lib -lmlx -lXext -lX11
+
+LIBFT = ./libft/includes
+
+SOURCE = main.c \
+	get_next_line.c
 
 POINTO = $(SOURCE:.c=.o)
 
 all: $(NAME)
+	@echo "all: OK"
 
 $(NAME):
 	@make -C libft/ fclean
 	@make -C libft
 	@make -C libft/ clean
-	@gcc -c $(SOURCE) -L libft/ -lft -L/usr/x11/lib -lmlx -lXext -lX11
-	@gcc -o $(NAME) $(POINTO) -L libft/ -lft -I includes/ -L/usr/x11/lib -lmlx -lXext -lX11
+	@gcc -c $(CFLAG) $(SOURCE) -I $(LIBFT)
+	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 
 test:
-	@gcc -c $(SOURCE) -L libft/ -lft
-	@gcc -o $(NAME) $(POINTO) -L libft/ -lft -I includes/ -L/usr/x11/lib -lmlx -lXext -lX11
+	@gcc -c $(CFLAG) $(SOURCE)
+	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
+	@echo "test: OK"
 
 clean:
 	@rm -rf $(POINTO)
 
 fclean: clean
 	@rm -rf $(NAME)
+	@echo "fclean: OK"
 
 re: fclean all
+
+.PHONY: re fclean clean all $(NAME) test
