@@ -34,14 +34,15 @@ int main(int ac, char **av)
 	if (get_next_line(fd, &line) == -1)
 		return (0);
 	map_char = ft_strsplit(line, ' ');
-	list = (t_data*)ft_memalloc(sizeof(t_data));
+	list = NULL;
 	i = 0;
-	tmp = list;
+	tmp = malloc(sizeof(t_data));
 	while (map_char[i])
 	{
 		tmp->x = 0;
 		tmp->y = i;
 		tmp->z = ft_atoi(map_char[i]);
+		tmp->next = list;
 		i++;
 	}
 	i = 1;
@@ -54,7 +55,7 @@ int main(int ac, char **av)
 			tmp->x = i;
 			tmp->y = j;
 			tmp->z = ft_atoi(map_char[j]);
-			// tmp = tmp->next;
+			tmp->next = list;
 			j++;
 		}
 		i++;
