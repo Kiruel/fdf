@@ -57,7 +57,7 @@ void	ft_malloc_tab(char ***tab, char const *s, char c)
 			size++;
 			i++;
 		}
-		tab[0][j] = (char*)malloc(sizeof(char) * size + 1);
+		tab[0][j] = (char*)ft_memalloc(sizeof(char) * size + 1);
 		j++;
 		i++;
 	}
@@ -73,14 +73,14 @@ char	**ft_strsplit(char const *s, char c)
 	match = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] == c)
+		while (s[i] != '\0' && s[i] == c)
 			i++;
 		match++;
-		while (s[i] != c)
+		while (s[i] != '\0' && s[i] != c)
 			i++;
 		i++;
 	}
-	tab = (char**)malloc(sizeof(char*) * match + 1);
+	tab = (char**)ft_memalloc(sizeof(char*) * match + 1);
 	ft_malloc_tab(&tab, s, c);
 	ft_complete(&tab, s, c);
 	return (tab);

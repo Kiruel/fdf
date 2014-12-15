@@ -15,12 +15,17 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/includes/libft.h"
+# include <fcntl.h>
 
 typedef struct	s_env
 {
 	void *mlx;
 	void *win;
 }				t_env;
+typedef struct 	s_data
+{
+	int	**map;
+}				t_data;
 
 int			get_next_line(int const fd, char **line);
 
