@@ -19,7 +19,8 @@ MINILIBX = -L/usr/x11/lib -lmlx -lXext -lX11
 LIBFT = ./libft/includes
 
 SOURCE = main.c \
-	get_next_line.c
+	get_next_line.c \
+	ft_list_reverse.c
 
 POINTO = $(SOURCE:.c=.o)
 

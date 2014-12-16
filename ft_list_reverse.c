@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_list_reverse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/28 17:35:34 by etheodor          #+#    #+#             */
-/*   Updated: 2014/11/28 17:35:35 by etheodor         ###   ########.fr       */
+/*   Created: 2014/11/25 09:13:36 by etheodor          #+#    #+#             */
+/*   Updated: 2014/11/27 09:37:21 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FDF_H
-# define FDF_H
-//# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libft/includes/libft.h"
-# include <fcntl.h>
 
-typedef struct	s_env
+#include "includes/fdf.h"
+
+void	ft_list_reverse(t_data **begin_list)
 {
-	void *mlx;
-	void *win;
-}				t_env;
-typedef struct 	s_data
-{
-	int	x;
-	int y;
-	int z;
-	struct s_data *next;
-}				t_data;
+	t_data *prev;
+	t_data *cur;
+	t_data *ret;
 
-int			get_next_line(int const fd, char **line);
-void		ft_list_reverse(t_data **begin_list);
-
-#endif
+	prev = NULL;
+	ret = NULL;
+	cur = *begin_list;
+	while (cur)
+	{
+		prev = cur;
+		cur = prev->next;
+		prev->next = ret;
+		ret = prev;
+	}
+	*begin_list = ret;
+}

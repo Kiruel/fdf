@@ -12,13 +12,32 @@
 
 #include "includes/fdf.h"
 
-t_data *add_link_first(t_data *list, int i, char *map_char)
+void	ft_print_list(t_data *list)
+{
+	t_data *tmp;
+
+	tmp = list;
+	while (tmp)
+	{
+		ft_putstr("Coordonee X: ");
+		ft_putnbr(tmp->x);
+		ft_putstr("\nCoordonee Y: ");
+		ft_putnbr(tmp->y);
+		ft_putstr("\nCoordonee Z: ");
+		ft_putnbr(tmp->z);
+		ft_putchar('\n');
+		ft_putchar('\n');
+		tmp = tmp->next;
+	}
+}
+
+t_data 	*add_link(t_data *list, int j, int i, char *map_char)
 {
 	t_data *tmp;
 	tmp = malloc(sizeof(t_data));
 	if (tmp)
 	{
-		tmp->x = 0;
+		tmp->x = j;
 		tmp->y = i;
 		tmp->z = ft_atoi(map_char);
 		tmp->next = list;
@@ -26,14 +45,14 @@ t_data *add_link_first(t_data *list, int i, char *map_char)
 	return (tmp);
 }
 
-int main(int ac, char **av)
+int 	main(int ac, char **av)
 {
 	t_data 	*list;
 	char 	*line;
 	char 	**map_char;
 	int 	fd;
-	int 	i;
-	// int     j;
+	int 	x;
+	int     y;
 
 	if (ac < 2)
 		return (0);
@@ -48,28 +67,21 @@ int main(int ac, char **av)
 		return (0);
 	map_char = ft_strsplit(line, ' ');
 	list = NULL;
-	i = 0;
-	while (map_char[i])
+	x = 0;
+	while (get_next_line(fd, &line) > 0)
 	{
-		list = add_link_first(list, i, map_char[i]);
-		i++;
-	}
-	i = 1;
-	/*while (get_next_line(fd, &line))
-	{	
 		map_char = ft_strsplit(line, ' ');
-		j = 0;
-		while (map_char[j])
+		y = 0;
+		while (map_char[y] && x < 1)
 		{
-			tmp->x = i;
-			tmp->y = j;
-			tmp->z = ft_atoi(map_char[j]);
-			list = tmp;
-			tmp = tmp->next;
-			j++;
+			list = (t_data*)ft_memalloc(sizeof(t_data));
+			list = add_link(list, x, y, map_char[y]);
+			ft_list_reverse(&list);
+			ft_print_list(list);
+			y++;
 		}
-		i++;
-	}*/
+		x++;
+	}
 	if (close(fd) == -1)
 	{
 		ft_putstr("close() failed\n");
