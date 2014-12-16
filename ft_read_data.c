@@ -44,8 +44,8 @@ t_data 	*add_link(t_data *list, int j, int i, char *map_char)
 	}
 	return (tmp);
 }
+t_data		**ft_read_data(char **av)
 
-int		ft_read_data(char **av)
 {
 	t_data 	**list;
 	char 	*line;
@@ -58,8 +58,8 @@ int		ft_read_data(char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr("opent() failed\n");
-		return (-1);
+		ft_putstr_fd("opent() failed\n", 2);
+		return (NULL);
 	}
 	map_char = ft_strsplit(line, ' ');
 	list = NULL;
@@ -82,8 +82,8 @@ int		ft_read_data(char **av)
 	}
 	if (close(fd) == -1)
 	{
-		ft_putstr("close() failed\n");
-		return (1);
+		ft_putstr_fd("close() failed\n", 2);
+		return (NULL);
 	}
-	return (0);
+	return (list);
 }

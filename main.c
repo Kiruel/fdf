@@ -14,25 +14,13 @@
 
 int 	main(int ac, char **av)
 {
+	t_data **list;
+
 	if (ac == 2)
-	{
-		if (ft_read_data(av) == -1)
-			return (0);
-	}
+		list = ft_read_data(av);
+	list++;
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
