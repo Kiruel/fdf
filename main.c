@@ -21,7 +21,7 @@ int 	main(int ac, char **av)
 	{
 		list = ft_read_data(av);
 		ft_putnbr(list[2][11]->z);
-		ft_putchar('\n');		
+		ft_putchar('\n');
 	}
 	list++;
 	return (0);
