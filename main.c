@@ -37,8 +37,8 @@ t_data 	*add_link(t_data *list, int j, int i, char *map_char)
 	tmp = malloc(sizeof(t_data));
 	if (tmp)
 	{
-		tmp->x = j;
-		tmp->y = i;
+		tmp->x = i;
+		tmp->y = j;
 		tmp->z = ft_atoi(map_char);
 		tmp->next = list;
 	}
@@ -47,12 +47,12 @@ t_data 	*add_link(t_data *list, int j, int i, char *map_char)
 
 int 	main(int ac, char **av)
 {
-	t_data 	*list;
+	t_data 	**list;
 	char 	*line;
 	char 	**map_char;
 	int 	fd;
-	int 	x;
-	int     y;
+	int 	i;
+	int     j;
 
 	if (ac < 2)
 		return (0);
@@ -63,31 +63,30 @@ int 	main(int ac, char **av)
 		ft_putstr("opent() failed\n");
 		return (0);
 	}
-	if (get_next_line(fd, &line) == -1)
-		return (0);
 	map_char = ft_strsplit(line, ' ');
 	list = NULL;
-	x = 0;
+	list = (t_data**)ft_memalloc(sizeof(t_data*));
+	i = 0;
 	while (get_next_line(fd, &line) > 0)
-	{
+	{	
 		map_char = ft_strsplit(line, ' ');
-		y = 0;
-		while (map_char[y] && x < 1)
+		j = 0;
+		while (map_char[j])
 		{
-			list = (t_data*)ft_memalloc(sizeof(t_data));
-			list = add_link(list, x, y, map_char[y]);
-			ft_list_reverse(&list);
-			ft_print_list(list);
-			y++;
+			list[i] = (t_data*)ft_memalloc(sizeof(t_data));
+			list[i] = add_link(list[i], j, i, map_char[j]);
+			list[i]->next = NULL;
+			ft_list_reverse(&list[i]);
+			ft_print_list(list[i]);
+			j++;
 		}
-		x++;
+		i++;
 	}
 	if (close(fd) == -1)
 	{
 		ft_putstr("close() failed\n");
 		return (1);
 	}
-
 	return (0);
 }
 
