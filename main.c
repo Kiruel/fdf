@@ -16,9 +16,13 @@ int 	main(int ac, char **av)
 {
 	t_data ***list;
 
+	list = NULL;
 	if (ac == 2)
+	{
 		list = ft_read_data(av);
-	// ft_putnbr(list[0][3]->z);
+		ft_putnbr(list[2][11]->z);
+		ft_putchar('\n');		
+	}
 	list++;
 	return (0);
 }
