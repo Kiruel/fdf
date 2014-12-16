@@ -27,11 +27,9 @@ typedef struct 	s_data
 	int	x;
 	int y;
 	int z;
-	struct s_data *next;
 }				t_data;
 
 int			get_next_line(int const fd, char **line);
-void		ft_list_reverse(t_data **begin_list);
-t_data		**ft_read_data(char **av);
+t_data		***ft_read_data(char **av);
 
 #endif

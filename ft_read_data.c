@@ -12,47 +12,15 @@
 
 #include "includes/fdf.h"
 
-void	ft_print_list(t_data *list)
-{
-	t_data *tmp;
-
-	tmp = list;
-	while (tmp)
-	{
-		ft_putstr("Coordonee X: ");
-		ft_putnbr(tmp->x);
-		ft_putstr("\nCoordonee Y: ");
-		ft_putnbr(tmp->y);
-		ft_putstr("\nCoordonee Z: ");
-		ft_putnbr(tmp->z);
-		ft_putchar('\n');
-		ft_putchar('\n');
-		tmp = tmp->next;
-	}
-}
-
-t_data 	*add_link(t_data *list, int j, int i, char *map_char)
-{
-	t_data *tmp;
-	tmp = malloc(sizeof(t_data));
-	if (tmp)
-	{
-		tmp->x = i;
-		tmp->y = j;
-		tmp->z = ft_atoi(map_char);
-		tmp->next = list;
-	}
-	return (tmp);
-}
-t_data		**ft_read_data(char **av)
+t_data		***ft_read_data(char **av)
 
 {
-	t_data 	**list;
+	t_data 	***list;
 	char 	*line;
-	char 	**map_char;
+	char 	**coor_z;
 	int 	fd;
-	int 	i;
-	int     j;
+	int 	coor_x;
+	int		j;
 
 	line = NULL;
 	fd = open(av[1], O_RDONLY);
@@ -61,24 +29,19 @@ t_data		**ft_read_data(char **av)
 		ft_putstr_fd("opent() failed\n", 2);
 		return (NULL);
 	}
-	map_char = ft_strsplit(line, ' ');
 	list = NULL;
-	list = (t_data**)ft_memalloc(sizeof(t_data*));
-	i = 0;
+	list = (t_data***)ft_memalloc(sizeof(t_data**));
+	coor_x = 0;
 	while (get_next_line(fd, &line) > 0)
 	{	
-		map_char = ft_strsplit(line, ' ');
+		coor_z = ft_strsplit(line, ' ');
 		j = 0;
-		while (map_char[j])
+		while (coor_z[j])
 		{
-			list[i] = (t_data*)ft_memalloc(sizeof(t_data));
-			list[i] = add_link(list[i], j, i, map_char[j]);
-			list[i]->next = NULL;
-			ft_list_reverse(&list[i]);
-			ft_print_list(list[i]);
+			
 			j++;
 		}
-		i++;
+		coor_x++;
 	}
 	if (close(fd) == -1)
 	{
@@ -87,3 +50,35 @@ t_data		**ft_read_data(char **av)
 	}
 	return (list);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*while (map_char[j])
+		{
+			w = 0;
+			while (w < j)
+			{
+				list[w] = (t_data**)malloc(sizeof(t_data*));
+				w++;
+			}
+			list[i][j] = (t_data*)malloc(sizeof(t_data));
+			list[i][j]->x = i;
+			list[i][j]->y = j;
+			list[i][j]->z = ft_atoi(map_char[j]);
+			j++;
+		}
+		i++;*/

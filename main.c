@@ -14,16 +14,13 @@
 
 int 	main(int ac, char **av)
 {
-	t_data **list;
+	t_data ***list;
 
 	if (ac == 2)
 		list = ft_read_data(av);
 	list++;
 	return (0);
 }
-
-
-
 
 /*void	draw_square(void *mlx, void *win)
 {
