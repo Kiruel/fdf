@@ -20,7 +20,8 @@ LIBFT = ./libft/includes
 
 SOURCE = main.c \
 	get_next_line.c \
-	ft_list_reverse.c
+	ft_list_reverse.c \
+	ft_read_data.c
 
 POINTO = $(SOURCE:.c=.o)
 
