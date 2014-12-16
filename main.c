@@ -18,6 +18,7 @@ int 	main(int ac, char **av)
 
 	if (ac == 2)
 		list = ft_read_data(av);
+	// ft_putnbr(list[0][3]->z);
 	list++;
 	return (0);
 }

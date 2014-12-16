@@ -16,14 +16,13 @@ void main()
 	t_data ***list;
 
 	i = 0;
-	list = NULL;
 	list = (t_data***)malloc(sizeof(t_data**));
 	while (i < 10)
 	{
 		k = 0;
 		while (k < 10)
 		{
-			list[i] = (t_data**)malloc(sizeof(t_data*));
+			list[k] = (t_data**)malloc(sizeof(t_data*));
 			k++;
 		}
 		list[i][j] = (t_data*)malloc(sizeof(t_data));

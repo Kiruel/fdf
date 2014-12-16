@@ -17,10 +17,10 @@ t_data		***ft_read_data(char **av)
 {
 	t_data 	***list;
 	char 	*line;
-	char 	**coor_z;
+	char 	**map_char;
 	int 	fd;
 	int 	coor_x;
-	int		j;
+	int		coor_y;
 
 	line = NULL;
 	fd = open(av[1], O_RDONLY);
@@ -34,15 +34,20 @@ t_data		***ft_read_data(char **av)
 	coor_x = 0;
 	while (get_next_line(fd, &line) > 0)
 	{	
-		coor_z = ft_strsplit(line, ' ');
-		j = 0;
-		while (coor_z[j])
+		map_char = ft_strsplit(line, ' ');
+		coor_y = 0;
+		list[coor_x] = (t_data**)ft_memalloc(sizeof(t_data*));
+		while (map_char[coor_y])
 		{
-			
-			j++;
+			list[coor_x][coor_y] = (t_data*)ft_memalloc(sizeof(t_data));
+			list[coor_x][coor_y]->x = coor_x;
+			list[coor_x][coor_y]->y = coor_y;
+			list[coor_x][coor_y]->z = ft_atoi(map_char[coor_y]);
+			coor_y++;
 		}
 		coor_x++;
 	}
+	// ft_putnbr(list[0][0]->x);
 	if (close(fd) == -1)
 	{
 		ft_putstr_fd("close() failed\n", 2);
