@@ -14,9 +14,8 @@
 
 void	draw_map(t_env *e)
 {
-	ft_putnbr(e->poil);
-	ft_putchar('\n');
-	mlx_pixel_put(e->mlx, e->win, 100, 100, 0xFF0000);
+
+	mlx_pixel_put(e->mlx, e->win, (e->map[0][0]->x + 50), (e->map[0][0]->y + 50), 0xFF0000);
 }
 
 /*int		mouse_hook(int buttons, int x, int y, t_env *e)
@@ -63,13 +62,10 @@ int 	main(int ac, char **av)
 	if (ac > 4)
 		return (0);
 	list = NULL;
-	if (ac == 2)
-	{
-		list = ft_read_data(av);
-	}
+	list = ft_read_data(av);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, ft_atoi(av[2]), ft_atoi(av[3]), "fdf");
-	e.poil = 23;
+	e.map = list; 
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);
