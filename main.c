@@ -14,8 +14,21 @@
 
 void	draw_map(t_env *e)
 {
+	int i;
+	int j;
 
-	mlx_pixel_put(e->mlx, e->win, (e->map[0][0]->x + 50), (e->map[0][0]->y + 50), 0xFF0000);
+	i = 0;
+	j = 0;
+	while (e->map[i])
+	{
+		j = 0;
+		while (e->map[i][j])
+		{
+			mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->y + (50 * (j + 1))), (e->map[i][j]->x + (50 * (i + 1))), 0xFF0000);
+			j++;
+		}
+		i++;
+	}
 }
 
 /*int		mouse_hook(int buttons, int x, int y, t_env *e)
@@ -53,18 +66,26 @@ int 	main(int ac, char **av)
 {
 	t_data 	***list;
 	t_env	e;
+	int 	*size;
+
+	size = (int*)ft_memalloc(sizeof(int) * 2);
 
 	if (ac < 4)
 	{
-		ft_putstr_fd("Error: Miss x and y window on argument 2-3\n", 2);
-		return (0);
+		size[0] = 1200;
+		size[1] = 1000;
+	}
+	else
+	{
+		size[0] = ft_atoi(av[2]);
+		size[1] = ft_atoi(av[3]);
 	}
 	if (ac > 4)
 		return (0);
 	list = NULL;
 	list = ft_read_data(av);
 	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, ft_atoi(av[2]), ft_atoi(av[3]), "fdf");
+	e.win = mlx_new_window(e.mlx, size[0], size[1], "fdf");
 	e.map = list; 
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
