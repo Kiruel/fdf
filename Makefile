@@ -32,12 +32,12 @@ $(NAME):
 	@make -C libft
 	@make -C libft/ clean
 	@gcc -c $(CFLAG) $(SOURCE) -I $(LIBFT)
-	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a #-L/usr/x11/lib -lmlx -lXext -lX11
+	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 
 test:
 	@gcc -c $(CFLAG) $(SOURCE)
-	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a #-L/usr/x11/lib -lmlx -lXext -lX11
+	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 	@echo "test: OK"
 

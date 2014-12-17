@@ -41,7 +41,7 @@ int		*ft_count_line(char **av)
 	return (height);
 }
 
-t_data	***ft_read_data(char **av)
+t_data		***ft_read_data(char **av)
 
 {
 	t_data 	***list;
@@ -78,6 +78,17 @@ t_data	***ft_read_data(char **av)
 		}
 		coor_x++;
 	}
+	map_char = ft_strsplit(line, ' ');
+	coor_y = 0;
+	list[coor_x] = (t_data**)ft_memalloc(sizeof(t_data*) * height[0]);
+	while (map_char[coor_y])
+	{
+		list[coor_x][coor_y] = (t_data*)ft_memalloc(sizeof(t_data));
+		list[coor_x][coor_y]->x = coor_x;
+		list[coor_x][coor_y]->y = coor_y;
+		list[coor_x][coor_y]->z = ft_atoi(map_char[coor_y]);
+		coor_y++;
+	}
 	if (close(fd) == -1)
 	{
 		ft_putstr_fd("close() failed\n", 2);
@@ -85,35 +96,3 @@ t_data	***ft_read_data(char **av)
 	}
 	return (list);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*while (map_char[j])
-		{
-			w = 0;
-			while (w < j)
-			{
-				list[w] = (t_data**)malloc(sizeof(t_data*));
-				w++;
-			}
-			list[i][j] = (t_data*)malloc(sizeof(t_data));
-			list[i][j]->x = i;
-			list[i][j]->y = j;
-			list[i][j]->z = ft_atoi(map_char[j]);
-			j++;
-		}
-		i++;*/

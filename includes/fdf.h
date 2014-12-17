@@ -11,23 +11,26 @@
 /* ************************************************************************** */
 #ifndef FDF_H
 # define FDF_H
-//# include <mlx.h>
+# include <mlx.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
 
-typedef struct	s_env
-{
-	void *mlx;
-	void *win;
-}				t_env;
 typedef struct 	s_data
 {
-	int	x;
-	int y;
-	int z;
+	int			x;
+	int 		y;
+	int 		z;
 }				t_data;
+
+typedef struct	s_env
+{
+	void 		*mlx;
+	void 		*win;
+	int			poil;
+	t_data		***map;
+}				t_env;
 
 int			get_next_line(int const fd, char **line);
 t_data		***ft_read_data(char **av);

@@ -12,38 +12,26 @@
 
 #include "includes/fdf.h"
 
-int 	main(int ac, char **av)
+void	draw_map(t_env *e)
 {
-	t_data ***list;
+	ft_putnbr(e->poil);
+	ft_putchar('\n');
+	mlx_pixel_put(e->mlx, e->win, 100, 100, 0xFF0000);
+}
 
-	list = NULL;
-	if (ac == 2)
-	{
-		list = ft_read_data(av);
-		ft_putnbr(list[2][11]->z);
-		ft_putchar('\n');
-	}
-	list++;
+/*int		mouse_hook(int buttons, int x, int y, t_env *e)
+{
+	e++;
+	write(1, "key: ", 5);
+	ft_putnbr(buttons);
+	ft_putstr(" (");
+	ft_putnbr(x);
+	ft_putchar(':');
+	ft_putnbr(y);
+	ft_putchar(')');
+	ft_putchar('\n');
 	return (0);
-}
-
-/*void	draw_square(void *mlx, void *win)
-{
-	int x;
-	int y;
-
-	y = 100;
-	while (y < 300)
-	{
-		x = 100;
-		while (x < 300)
-		{
-			mlx_pixel_put(mlx, win, x, y, 0xFF0000);
-			x++;
-		}
-		y++;
-	}
-}
+}*/
 
 int		key_hook(int keycode, t_env *e)
 {
@@ -56,30 +44,36 @@ int		key_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int		mouse_hook(int buttons, int x, int y, t_env *e)
-{
-	e++;
-	write(1, "key: ", 5);
-	ft_putnbr(buttons);
-	ft_putstr(" (");
-	ft_putnbr(x);
-	ft_putchar(':');
-	ft_putnbr(y);
-	ft_putchar(')');
-	ft_putchar('\n');
-	return (0);
-}
-
 int		expose_hook(t_env *e)
 {
-	draw_square(e->mlx, e->win);
+	draw_map(e);
 	return (0);
 }
-int main()
-{
-	// t_env 	e;
 
-	// e.mlx = mlx_init();
-	// e.win = mlx_new_window(e.mlx, 600, 600, "fdf");
+int 	main(int ac, char **av)
+{
+	t_data 	***list;
+	t_env	e;
+
+	if (ac < 4)
+	{
+		ft_putstr_fd("Error: Miss x and y window on argument 2-3\n", 2);
+		return (0);
+	}
+	if (ac > 4)
+		return (0);
+	list = NULL;
+	if (ac == 2)
+	{
+		list = ft_read_data(av);
+	}
+	e.mlx = mlx_init();
+	e.win = mlx_new_window(e.mlx, ft_atoi(av[2]), ft_atoi(av[3]), "fdf");
+	e.poil = 23;
+	mlx_key_hook(e.win, key_hook, &e);
+	mlx_expose_hook(e.win, expose_hook, &e);
+	// mlx_mouse_hook(e.win, mouse_hook, &e);
+	mlx_loop(e.mlx);
+	free(list);
+	return (0);
 }
-*/
