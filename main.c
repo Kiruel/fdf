@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
+#define ECART	5
 
 void	draw_map(t_env *e)
 {
@@ -24,7 +25,16 @@ void	draw_map(t_env *e)
 		j = 0;
 		while (e->map[i][j])
 		{
-			mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->y + (50 * (j + 1))), (e->map[i][j]->x + (50 * (i + 1))), 0xFF0000);
+			if (e->map[i][j]->z >= 10)
+			{
+			mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->y + (ECART * (j + 1))),
+				(e->map[i][j]->x + (ECART * (i + 1))), 0xFFFFFF);				
+			}
+			else
+			{
+			mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->y + (ECART * (j + 1))),
+				(e->map[i][j]->x + (ECART * (i + 1))), 0xFF0000);				
+			}
 			j++;
 		}
 		i++;
