@@ -11,7 +11,80 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-#define ECART	5
+#define ECART			50
+#define DEFAUT_X		1200
+#define DEFAUT_Y		800
+#define COLOR_PIXEL		0x501F0D
+#define COLOR_PIXEL_Z	0xD77B28
+
+void	draw_point(t_env *e, int i, int j)
+{
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y - 1 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y + 1 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y - 2 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y + 2 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y - 1 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y - 1 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 2 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 2 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + 1 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 2 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + 1 + (ECART * (i + 1))), COLOR_PIXEL);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x  + (ECART * (j + 1))),
+		(e->map[i][j]->y + 2 + (ECART * (i + 1))), COLOR_PIXEL);
+
+}
+
+void	draw_point_white(t_env *e, int i, int j)
+{
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y - 1 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y + 1 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y - 2 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + (ECART * (j + 1))),
+		(e->map[i][j]->y + 2 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y - 1 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y - 1 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 2 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 2 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x - 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + 1 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 2 + (ECART * (j + 1))),
+		(e->map[i][j]->y + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x + 1 + (ECART * (j + 1))),
+		(e->map[i][j]->y + 1 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+	mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->x  + (ECART * (j + 1))),
+		(e->map[i][j]->y + 2 + (ECART * (i + 1))), COLOR_PIXEL_Z);
+}
 
 void	draw_map(t_env *e)
 {
@@ -26,15 +99,9 @@ void	draw_map(t_env *e)
 		while (e->map[i][j])
 		{
 			if (e->map[i][j]->z >= 10)
-			{
-			mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->y + (ECART * (j + 1))),
-				(e->map[i][j]->x + (ECART * (i + 1))), 0xFFFFFF);				
-			}
+				draw_point_white(e, i, j);
 			else
-			{
-			mlx_pixel_put(e->mlx, e->win, (e->map[i][j]->y + (ECART * (j + 1))),
-				(e->map[i][j]->x + (ECART * (i + 1))), 0xFF0000);				
-			}
+				draw_point(e, i ,j);
 			j++;
 		}
 		i++;
@@ -82,8 +149,8 @@ int 	main(int ac, char **av)
 
 	if (ac < 4)
 	{
-		size[0] = 1200;
-		size[1] = 1000;
+		size[0] = DEFAUT_X;
+		size[1] = DEFAUT_Y;
 	}
 	else
 	{

@@ -71,8 +71,8 @@ t_data		***ft_read_data(char **av)
 		while (map_char[coor_y])
 		{
 			list[coor_x][coor_y] = (t_data*)ft_memalloc(sizeof(t_data));
-			list[coor_x][coor_y]->x = coor_x;
-			list[coor_x][coor_y]->y = coor_y;
+			list[coor_x][coor_y]->x = coor_y;
+			list[coor_x][coor_y]->y = coor_x;
 			list[coor_x][coor_y]->z = ft_atoi(map_char[coor_y]);
 			coor_y++;
 		}
@@ -84,8 +84,8 @@ t_data		***ft_read_data(char **av)
 	while (map_char[coor_y])
 	{
 		list[coor_x][coor_y] = (t_data*)ft_memalloc(sizeof(t_data));
-		list[coor_x][coor_y]->x = coor_x;
-		list[coor_x][coor_y]->y = coor_y;
+		list[coor_x][coor_y]->x = coor_y;
+		list[coor_x][coor_y]->y = coor_x;
 		list[coor_x][coor_y]->z = ft_atoi(map_char[coor_y]);
 		coor_y++;
 	}
