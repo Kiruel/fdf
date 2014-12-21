@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-#define ECART			50
-#define DEFAUT_X		1200
-#define DEFAUT_Y		800
+#define ECART			7
+#define DEFAUT_X		800
+#define DEFAUT_Y		600
 #define COLOR_PIXEL		0x501F0D
 #define COLOR_PIXEL_Z	0xD77B28
 
