@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-#define ECART			7
+#define ECART			20
 #define DEFAUT_X		800
 #define DEFAUT_Y		600
 #define COLOR_PIXEL		0x501F0D
 #define COLOR_PIXEL_Z	0xD77B28
+#define VALEUR_T_X		10
 
 void	draw_point(t_env *e, int i, int j)
 {
@@ -99,9 +100,13 @@ void	draw_map(t_env *e)
 		while (e->map[i][j])
 		{
 			if (e->map[i][j]->z >= 10)
+			{
 				draw_point_white(e, i, j);
+			}
 			else
+			{
 				draw_point(e, i ,j);
+			}
 			j++;
 		}
 		i++;
@@ -122,20 +127,43 @@ void	draw_map(t_env *e)
 	return (0);
 }*/
 
-int		key_hook(int keycode, t_env *e)
+void	ft_translate_plus(t_env *e)
 {
-	e++;
-	if (keycode == 65307)
-		exit(0);
-	write(1, "key: ", 5);
-	ft_putnbr(keycode);
-	ft_putchar('\n');
-	return (0);
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (e->map[y])
+	{
+		x = 0;
+		while (e->map[x])
+		{
+			e->map[x][y]->x += VALEUR_T_X;
+			x++;
+		}
+		y++;
+	}
 }
 
 int		expose_hook(t_env *e)
 {
 	draw_map(e);
+	return (0);
+}
+
+int		key_hook(int keycode, t_env *e)
+{
+	if (keycode == 65307)
+		exit(0);
+	write(1, "key: ", 5);
+	ft_putnbr(keycode);
+	ft_putchar('\n');
+	if (keycode == 65363)
+	{
+		ft_translate_plus(e);
+		ft_putendl("You put right");
+	}
 	return (0);
 }
 
@@ -163,7 +191,7 @@ int 	main(int ac, char **av)
 	list = ft_read_data(av);
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, size[0], size[1], "fdf");
-	e.map = list; 
+	e.map = list;
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);
