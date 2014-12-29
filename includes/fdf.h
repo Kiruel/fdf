@@ -31,6 +31,7 @@ typedef struct	s_env
 	void 		*win;
 	int			poil;
 	int 		ecart;
+	double		scale;
 	t_data		***map;
 }				t_env;
 

@@ -22,6 +22,7 @@ void	draw_map(t_env *e)
 	int j;
 	int x;
 	int y;
+	int z;
 
 	i = 0;
 	j = 0;
@@ -32,8 +33,9 @@ void	draw_map(t_env *e)
 		{
 			x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
 			y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
+			z = e->map[i][j]->z * e->ecart * e->scale;
 			if (e->map[i][j]->z >= 10)
-				mlx_pixel_put(e->mlx, e->win, x, y, COLOR_PIXEL_Z);
+				mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL_Z);
 			else
 				mlx_pixel_put(e->mlx, e->win, x, y, COLOR_PIXEL);
 			j++;
@@ -102,6 +104,10 @@ int		key_hook(int keycode, t_env *e)
         e->ecart--;
     if (keycode == 61 || keycode == 65451)
         e->ecart++;
+    if (keycode == 65365)
+        e->scale += 0.1;
+    if (keycode == 65366)
+        e->scale -= 0.1;
     expose_hook(e);
 	// if (keycode == 65451)
 	// {
@@ -137,6 +143,7 @@ int 	main(int ac, char **av)
 	e.win = mlx_new_window(e.mlx, size[0], size[1], "fdf");
 	e.map = list;
 	e.ecart = 20;
+	e.scale = 0.1;
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);
