@@ -13,11 +13,15 @@
 #include "includes/fdf.h"
 #define DEFAUT_X		1200
 #define DEFAUT_Y		800
+#define COLOR_PIXEL		0xFFFFFF
+#define COLOR_PIXEL_Z	0xE8361B
 
 void	draw_map(t_env *e)
 {
 	int i;
 	int j;
+	int x;
+	int y;
 
 	i = 0;
 	j = 0;
@@ -26,14 +30,12 @@ void	draw_map(t_env *e)
 		j = 0;
 		while (e->map[i][j])
 		{
+			x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
+			y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
 			if (e->map[i][j]->z >= 10)
-			{
-				draw_point_white(e, i, j);
-			}
+				mlx_pixel_put(e->mlx, e->win, x, y, COLOR_PIXEL_Z);
 			else
-			{
-				draw_point(e, i ,j);
-			}
+				mlx_pixel_put(e->mlx, e->win, x, y, COLOR_PIXEL);
 			j++;
 		}
 		i++;
@@ -87,35 +89,22 @@ int		key_hook(int keycode, t_env *e)
 	ft_putnbr(keycode);
 	ft_putchar('\n');
 	if (keycode == 65363)
-	{
 		ft_translate_more(e);
-		expose_hook(e);
-	}
 	if (keycode == 65361)
-	{
 		ft_translate_less(e);
-		expose_hook(e);
-	}
 	if (keycode == 65362)
-	{
 		ft_translate_up(e);
-		expose_hook(e);
-	}
 	if (keycode == 65364)
-	{
 		ft_translate_down(e);
-		expose_hook(e);
-	}
 	if (keycode == 65457)
-	{
 		ft_rot_x(e);
-		expose_hook(e);
-	}
 	if (keycode == 65459)
-	{
 		ft_rot_z(e);
-		expose_hook(e);
-	}
+	if (keycode == 45 || keycode == 65453)
+        e->ecart--;
+    if (keycode == 61 || keycode == 65451)
+        e->ecart++;
+    expose_hook(e);
 	// if (keycode == 65451)
 	// {
 	// 	ft_zoom_more(e);
@@ -149,6 +138,7 @@ int 	main(int ac, char **av)
 	e.mlx = mlx_init();
 	e.win = mlx_new_window(e.mlx, size[0], size[1], "fdf");
 	e.map = list;
+	e.ecart = 20;
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_expose_hook(e.win, expose_hook, &e);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);

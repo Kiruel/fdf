@@ -30,6 +30,7 @@ typedef struct	s_env
 	void 		*mlx;
 	void 		*win;
 	int			poil;
+	int 		ecart;
 	t_data		***map;
 }				t_env;
 
