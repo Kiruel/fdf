@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-#define DEFAUT_X		800
-#define DEFAUT_Y		600
+#define DEFAUT_X		1200
+#define DEFAUT_Y		800
 
 void	draw_map(t_env *e)
 {
@@ -106,6 +106,21 @@ int		key_hook(int keycode, t_env *e)
 		ft_translate_down(e);
 		expose_hook(e);
 	}
+	if (keycode == 65457)
+	{
+		ft_rot_x(e);
+		expose_hook(e);
+	}
+	if (keycode == 65459)
+	{
+		ft_rot_z(e);
+		expose_hook(e);
+	}
+	// if (keycode == 65451)
+	// {
+	// 	ft_zoom_more(e);
+	// 	expose_hook(e);
+	// }
 	return (0);
 }
 

@@ -16,12 +16,13 @@
 # include <unistd.h>
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct 	s_data
 {
-	int			x;
-	int 		y;
-	int 		z;
+	double		x;
+	double 		y;
+	double 		z;
 }				t_data;
 
 typedef struct	s_env
@@ -38,6 +39,9 @@ void		ft_translate_down(t_env *e);
 void		ft_translate_up(t_env *e);
 void		ft_translate_more(t_env *e);
 void		ft_translate_less(t_env *e);
+void		ft_rot_x(t_env *e);
+void		ft_rot_z(t_env *e);
+void 		ft_zoom_more(t_env *e);
 void		draw_point_white(t_env *e, int i, int j);
 void		draw_point(t_env *e, int i, int j);
 
