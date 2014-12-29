@@ -18,7 +18,7 @@ static float ft_rad(float x)
 	return (x * Pi / 180);
 }
 
-void	ft_rot_z(t_env *e)
+/*void	ft_rot_z(t_env *e)
 {
 	int 	coor_x;
 	int 	coor_y;
@@ -41,7 +41,7 @@ void	ft_rot_z(t_env *e)
 		}
 		coor_y++;
 	}
-}
+}*/
 
 void	ft_rot_x(t_env *e)
 {

@@ -98,8 +98,6 @@ int		key_hook(int keycode, t_env *e)
 		ft_translate_down(e);
 	if (keycode == 65457)
 		ft_rot_x(e);
-	if (keycode == 65459)
-		ft_rot_z(e);
 	if (keycode == 45 || keycode == 65453)
         e->ecart--;
     if (keycode == 61 || keycode == 65451)
