@@ -34,5 +34,11 @@ typedef struct	s_env
 
 int			get_next_line(int const fd, char **line);
 t_data		***ft_read_data(char **av);
+void		ft_translate_down(t_env *e);
+void		ft_translate_up(t_env *e);
+void		ft_translate_more(t_env *e);
+void		ft_translate_less(t_env *e);
+void		draw_point_white(t_env *e, int i, int j);
+void		draw_point(t_env *e, int i, int j);
 
 #endif
