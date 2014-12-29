@@ -18,31 +18,6 @@ static float ft_rad(float x)
 	return (x * Pi / 180);
 }
 
-/*void	ft_rot_z(t_env *e)
-{
-	int 	coor_x;
-	int 	coor_y;
-	int		x;
-	int 	y;
-
-	x = 0;
-	y = 0;
-	coor_x = 0;
-	coor_y = 0;
-	while (e->map[coor_y])
-	{
-		coor_x = 0;
-		while (e->map[coor_y][coor_x])
-		{
-			x = (e->map[coor_y][coor_x]->x - e->map[coor_y][coor_x]->y) * 20;
-			y = (e->map[coor_y][coor_x]->x + e->map[coor_y][coor_x]->y) * 10;
-			mlx_pixel_put(e->mlx, e->win, x, y, 0xFFFFFF);
-			coor_x++;
-		}
-		coor_y++;
-	}
-}*/
-
 void	ft_rot_x(t_env *e)
 {
 	int coor_x;

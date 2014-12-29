@@ -42,8 +42,6 @@ void		ft_translate_up(t_env *e);
 void		ft_translate_more(t_env *e);
 void		ft_translate_less(t_env *e);
 void		ft_rot_x(t_env *e);
-// void		ft_rot_z(t_env *e);
-void 		ft_zoom_more(t_env *e);
 void		draw_point_white(t_env *e, int i, int j);
 void		draw_point(t_env *e, int i, int j);
 

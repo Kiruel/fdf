@@ -101,19 +101,16 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == 65457)
 		ft_rot_x(e);
 	if (keycode == 45 || keycode == 65453)
-        e->ecart--;
+    	if (e->ecart > 0)
+        	e->ecart--;
     if (keycode == 61 || keycode == 65451)
-        e->ecart++;
-    if (keycode == 65365)
+    	if (e->ecart >= 0)
+        	e->ecart++;
+    if (keycode == 65365 || keycode == 108)
         e->scale += 0.1;
-    if (keycode == 65366)
+    if (keycode == 65366 || keycode == 59)
         e->scale -= 0.1;
-    expose_hook(e);
-	// if (keycode == 65451)
-	// {
-	// 	ft_zoom_more(e);
-	// 	expose_hook(e);
-	// }
+	expose_hook(e);
 	return (0);
 }
 
