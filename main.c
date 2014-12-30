@@ -34,10 +34,11 @@ void	draw_map(t_env *e)
 			x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
 			y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
 			z = e->map[i][j]->z * e->ecart * e->scale;
+			ft_print_map();
 			if (e->map[i][j]->z >= 10)
 				mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL_Z);
 			else
-				mlx_pixel_put(e->mlx, e->win, x, y, COLOR_PIXEL);
+				mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL);
 			j++;
 		}
 		i++;
