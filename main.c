@@ -13,16 +13,37 @@
 #include "includes/fdf.h"
 #define DEFAUT_X		1200
 #define DEFAUT_Y		800
-#define COLOR_PIXEL		0xFFFFFF
-#define COLOR_PIXEL_Z	0xE8361B
+#define COLOR_PIXEL		0xFCFFFE
+
+void	ft_print_map(int i, int j, t_env *e)
+{
+	int x;
+	int y;
+	int z;
+
+	x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
+	y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
+	z = e->map[i][j]->z * e->ecart * e->scale;
+	if (e->map[i][j]->z < 0 && e->map[i][j]->z > -80)
+		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x00B5FF);
+	else if (e->map[i][j]->z < -81 && e->map[i][j]->z > -160)
+		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x0061DB);
+	else if (e->map[i][j]->z < -160)
+		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x0048A3);
+	else if (e->map[i][j]->z > 0 && e->map[i][j]->z < 40)
+		mlx_pixel_put(e->mlx, e->win, x, y - z, 0xF5D37D);
+	else if (e->map[i][j]->z > 41 && e->map[i][j]->z < 80)
+		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x157A0A);
+	else if (e->map[i][j]->z > 81 && e->map[i][j]->z < 400)
+		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x523C0B);
+	else
+		mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL);
+}
 
 void	draw_map(t_env *e)
 {
 	int i;
 	int j;
-	int x;
-	int y;
-	int z;
 
 	i = 0;
 	j = 0;
@@ -31,14 +52,7 @@ void	draw_map(t_env *e)
 		j = 0;
 		while (e->map[i][j])
 		{
-			x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
-			y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
-			z = e->map[i][j]->z * e->ecart * e->scale;
-			ft_print_map();
-			if (e->map[i][j]->z >= 10)
-				mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL_Z);
-			else
-				mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL);
+			ft_print_map(i, j, e);
 			j++;
 		}
 		i++;
