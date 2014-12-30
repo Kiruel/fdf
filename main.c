@@ -15,6 +15,34 @@
 #define DEFAUT_Y		800
 #define COLOR_PIXEL		0xFCFFFE
 
+/*static void		ft_draw_line(t_env e, int i, int j, int v[10])
+{
+	v[6] = e->map[i][j]->x * e.space_x;
+	v[8] = e->map[i][j]->y * e.space_y;
+	v[7] = e->map[i][j + 1]->x * e.space_x;
+	v[9] = e->map[i][j + 1]->y * e.space_y;
+	v[0] = abs(v[7] - v[6]);
+	v[2] = v[6] < v[7] ? 1 : -1;
+	v[1] = abs(v[9] - v[8]);
+	v[3] = v[8] < v[9] ? 1 : -1;
+	v[4] = (v[0] > v[1] ? v[0] : -v[1]) / 2;
+	while (1)
+	{
+		mlx_pixel_put(e.mlx, e.win, v[6] + e.o_x, v[8] + e.o_y, e.color);
+		if ((v[6] == v[7]) && (v[8] == v[9]))
+			break ;
+		v[5] = v[4];
+		if (v[5] > -v[0])
+			v[4] -= v[1];
+		if (v[5] > -v[0])
+			v[6] += v[2];
+		if (v[5] < v[1])
+			v[4] += v[0];
+		if (v[5] < v[1])
+			v[8] += v[3];
+	}
+}*/
+
 void	ft_print_map(int i, int j, t_env *e)
 {
 	int x;
@@ -44,6 +72,7 @@ void	draw_map(t_env *e)
 {
 	int i;
 	int j;
+	// int *v;
 
 	i = 0;
 	j = 0;
@@ -53,6 +82,7 @@ void	draw_map(t_env *e)
 		while (e->map[i][j])
 		{
 			ft_print_map(i, j, e);
+			// ft_draw_line(e, i, j, v);
 			j++;
 		}
 		i++;

@@ -109,9 +109,9 @@ t_data		***ft_read_data(char **av)
 		long_x++;
 		coor_x++;
 	}
-/*	map_char = ft_strsplit(line, ' ');
+	map_char = ft_strsplit(line, ' ');
 	coor_y = 0;
-	list[coor_x] = (t_data**)ft_memalloc(sizeof(t_data*) * height[0]);
+	list[coor_x] = (t_data**)ft_memalloc(sizeof(t_data*) * height[long_x]);
 	while (map_char[coor_y])
 	{
 		list[coor_x][coor_y] = (t_data*)ft_memalloc(sizeof(t_data));
@@ -119,7 +119,8 @@ t_data		***ft_read_data(char **av)
 		list[coor_x][coor_y]->y = coor_x;
 		list[coor_x][coor_y]->z = ft_atoi(map_char[coor_y]);
 		coor_y++;
-	}*/
+	}
+	free(height);
 	if (close(fd) == -1)
 	{
 		ft_putstr_fd("close() failed\n", 2);
