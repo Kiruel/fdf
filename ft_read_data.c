@@ -41,7 +41,7 @@ int		*ft_count_line(char **av)
 		ft_putstr_fd("opent() failed\n", 2);
 	}
 	p = 1;
-	height = (int*)ft_memalloc(sizeof(int) * long_y);
+	height = (int*)ft_memalloc(sizeof(int) * long_y + 1);
 	while (get_next_line(fd, &line) > 0)
 	{
 		map_char = ft_strsplit_fdf(line);
@@ -55,11 +55,10 @@ int		*ft_count_line(char **av)
 		p++;
 	}
 	i = 0;
-	get_next_line(fd, &line);
 	map_char = ft_strsplit_fdf(line);
 	while (map_char[i])
 	{
-		ft_putendl(map_char[i]);
+		height[p]++;
 		i++;
 	}
 	ft_putnbr(height[11]);
