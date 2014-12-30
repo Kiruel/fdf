@@ -18,8 +18,9 @@ int		*ft_count_line(char **av)
 	char 	*line;
 	int 	*height;
 	char 	**map_char;
+	int 	i;
+	int		p;
 
-	height = (int*)ft_memalloc(sizeof(int) * 2);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -27,10 +28,20 @@ int		*ft_count_line(char **av)
 	}
 	while (get_next_line(fd, &line) > 0)
 	{
-		map_char = ft_strsplit(line, ' ');
-		while (map_char[height[0]])
-			height[0]++;
-		height[1]++;
+		map_char = ft_strsplit_fdf(line);
+		i = 0;
+		while (map_char[i])
+			i++;
+		height = (int*)ft_memalloc(sizeof(int) * i);
+		p = 1;
+		i = 0;
+		while (map_char[i])
+		{
+			height[i]++;
+			j++;
+		}
+		height[0]++;
+		p++;
 	}
 	if (close(fd) == -1)
 	{
@@ -60,13 +71,13 @@ t_data		***ft_read_data(char **av)
 		return (NULL);
 	}
 	list = NULL;
-	list = (t_data***)ft_memalloc(sizeof(t_data**) * height[1]);
+	list = (t_data***)ft_memalloc(sizeof(t_data**) * height[0]);
 	coor_x = 0;
 	while (get_next_line(fd, &line) > 0)
 	{	
 		map_char = ft_strsplit(line, ' ');
 		coor_y = 0;
-		list[coor_x] = (t_data**)ft_memalloc(sizeof(t_data*) * height[0]);
+		list[coor_x] = (t_data**)ft_memalloc(sizeof(t_data*) * height[coor_x + 1]);
 		while (map_char[coor_y])
 		{
 			list[coor_x][coor_y] = (t_data*)ft_memalloc(sizeof(t_data));

@@ -44,5 +44,6 @@ void		ft_translate_less(t_env *e);
 void		ft_rot_x(t_env *e);
 void		draw_point_white(t_env *e, int i, int j);
 void		draw_point(t_env *e, int i, int j);
+char		**ft_strsplit_fdf(char const *s);
 
 #endif
