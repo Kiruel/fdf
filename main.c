@@ -149,6 +149,12 @@ int 	main(int ac, char **av)
 	}
 	if (ac > 4)
 		return (0);
+	if (ac < 2)
+	{
+		ft_putstr_fd("Missing args after binary.", 2);
+		ft_putchar('\n');
+		return (0);
+	}
 	list = NULL;
 	list = ft_read_data(av);
 	e.mlx = mlx_init();

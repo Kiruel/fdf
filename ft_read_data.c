@@ -24,7 +24,6 @@ int		*ft_count_line(char **av)
 	if (fd == -1)
 	{
 		ft_putstr_fd("opent() failed\n", 2);
-		return (0);
 	}
 	while (get_next_line(fd, &line) > 0)
 	{
