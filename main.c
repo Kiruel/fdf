@@ -70,7 +70,7 @@ void	ft_print_map(int i, int j, t_env *e)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x523C0B);
 	else
 		mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL);
-				ft_print_segment(i, j, e);
+	// ft_print_segment(i, j, e);
 }
 
 void	draw_map(t_env *e)
