@@ -9,71 +9,75 @@
 /*   Updated: 2014/11/19 15:18:04 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "includes/get_next_line.h"
 
-static int	ft_to_fill(char **line, char **ptr)
+t_lst				*get_buff_fd(int fd, t_lst *list)
 {
-	int		i;
-	char	*old;
-
-	i = 0;
-	while ((*ptr)[i] != '\n' && (*ptr)[i] != '\0')
-		i++;
-	old = (char*)ft_memalloc(sizeof(char) * i + 1);
-	i = 0;
-	while ((*ptr)[i] != '\n' && (*ptr)[i] != '\0')
+	while (list)
 	{
-		old[i] = (*ptr)[i];
-		i++;
+		if (list->fd == fd)
+			return (list);
+		list = list->next;
 	}
-	old[i] = '\0';
-	if (*line)
-		*line = ft_strjoin(*line, old);
-	else
-		*line = *ptr;
-	if ((*ptr)[i] == '\n')
-	{
-		*ptr = &(*ptr)[i + 1];
-		return (1);
-	}
-	return (0);
+	if ((list = (t_lst*)malloc(sizeof(t_lst))) == NULL)
+		return (NULL);
+	if ((list->buf = (char*)ft_memalloc(BUFF + 1)) == NULL)
+		return (NULL);
+	list->fd = fd;
+	return (list);
 }
 
-static int	ft_read(char **str, int fd)
+static int			ft_gnl_cut(int fd, char **line, char **buf, char *pos)
 {
-	int		i;
-	char	*buff;
+	int		ret;
 
-	buff = (char*)ft_memalloc(sizeof(char) * BUFF_SIZE + 1);
-	i = read(fd, buff, BUFF_SIZE);
-	if (i == -1)
-		return (-1);
-	*str = buff;
-	return (i);
-}
-
-int			get_next_line(int const fd, char **line)
-{
-	static char *str;
-	int			i;
-
-	*line = 0;
-	if (BUFF_SIZE < 1 || !line)
-		return (-1);
-	if (str != 0)
+	*line = ft_strdup(*buf);
+	while (!pos)
 	{
-		if (ft_to_fill(line, &str) == 1)
-			return (1);
-	}
-	i = 1;
-	while (i)
-	{
-		i = ft_read(&str, fd);
-		if (i == -1)
+		if ((ret = read(fd, *buf, BUFF)) < 0)
 			return (-1);
-		if (ft_to_fill(line, &str) == 1)
-			return (1);
+		if ((pos = ft_strchr(*buf, '\n')) == NULL && !ret)
+			return ((*buf)[0] = 0);
+		else if (pos)
+		{
+			(*buf)[ret] = ret ? 0 : (*buf)[ret];
+			pos[0] = 0;
+			*line = ft_strjoin(*line, *buf);
+			ft_strcpy(*buf, pos + 1);
+		}
+		else
+		{
+			(*buf)[ret] = ret ? 0 : (*buf)[ret];
+			*line = ft_strjoin(*line, *buf);
+			(*buf)[0] = 0;
+		}
 	}
-	return (i);
+	return (*line ? 1 : -1);
+}
+
+int					get_next_line(int const fd, char **line)
+{
+	static t_lst	*begin_list;
+	t_lst			*list;
+	char			*pos;
+	int				ret;
+
+	if (!begin_list)
+		if ((begin_list = get_buff_fd(fd, begin_list)) == NULL)
+			return (-1);
+	if ((list = get_buff_fd(fd, begin_list)) == NULL)
+		return (-1);
+	pos = ft_strchr(list->buf, '\n');
+	if (pos)
+	{
+		*pos = 0;
+		*line = ft_strdup(list->buf);
+		ft_strcpy(list->buf, pos + 1);
+		return (*line ? 1 : -1);
+	}
+	else
+		ret = ft_gnl_cut(fd, line, &list->buf, NULL);
+	if (ret == -1)
+		return (-1);
+	return (ret ? 1 : ft_strlen(*line) != 0);
 }

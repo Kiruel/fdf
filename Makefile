@@ -41,8 +41,8 @@ $(NAME):
 	@make clean
 
 test:
-	@gcc -c $(CFLAG) $(SOURCE)
-	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
+	@cc -c $(CFLAG) $(SOURCE)
+	@cc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 	@echo "test: OK"
 

@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 #ifndef FDF_H
 # define FDF_H
+# define DEFAUT_X		1200
+# define DEFAUT_Y		800
+# define COLOR_PIXEL	0xFCFFFE
 # include "mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -34,6 +37,9 @@ typedef struct	s_env
 	double 		ecart;
 	double		scale;
 	t_data		***map;
+	double		delta_x;
+	double		delta_y;
+	double		delta_z;
 }				t_env;
 
 int			get_next_line(int const fd, char **line);

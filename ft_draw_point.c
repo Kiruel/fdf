@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-#define COLOR_PIXEL		0x501F0D
 #define COLOR_PIXEL_Z	0xD77B28
 
 void	draw_point(t_env *e, int i, int j)

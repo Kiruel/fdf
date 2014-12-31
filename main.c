@@ -11,24 +11,28 @@
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
-#define DEFAUT_X		1200
-#define DEFAUT_Y		800
-#define COLOR_PIXEL		0xFCFFFE
 
-/*static void		ft_draw_line(t_env e, int i, int j, int v[10])
+/*void		ft_draw_line(t_env *e, int i, int j)
 {
-	v[6] = e->map[i][j]->x * e.space_x;
-	v[8] = e->map[i][j]->y * e.space_y;
-	v[7] = e->map[i][j + 1]->x * e.space_x;
-	v[9] = e->map[i][j + 1]->y * e.space_y;
+	int *v;
+
+	v = (int*)ft_memalloc(sizeof(int) * 10);
+	v[6] = e->map[i][j]->x * e->ecart;
+	v[8] = e->map[i][j]->y * (e->ecart)/2;
+	v[7] = e->map[i][j + 1]->x * e->ecart;
+	v[9] = e->map[i][j + 1]->y * (e->ecart)/2;
 	v[0] = abs(v[7] - v[6]);
 	v[2] = v[6] < v[7] ? 1 : -1;
 	v[1] = abs(v[9] - v[8]);
 	v[3] = v[8] < v[9] ? 1 : -1;
 	v[4] = (v[0] > v[1] ? v[0] : -v[1]) / 2;
+	ft_putnbr(v[6]);
+	ft_putchar(':');
+	ft_putnbr(v[8]);
+	ft_putchar('\n');
 	while (1)
 	{
-		mlx_pixel_put(e.mlx, e.win, v[6] + e.o_x, v[8] + e.o_y, e.color);
+		mlx_pixel_put(e->mlx, e->win, v[6], v[8], 0xFFFFFF);
 		if ((v[6] == v[7]) && (v[8] == v[9]))
 			break ;
 		v[5] = v[4];
@@ -66,13 +70,13 @@ void	ft_print_map(int i, int j, t_env *e)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x523C0B);
 	else
 		mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL);
+				ft_print_segment(i, j, e);
 }
 
 void	draw_map(t_env *e)
 {
 	int i;
 	int j;
-	// int *v;
 
 	i = 0;
 	j = 0;
@@ -82,7 +86,6 @@ void	draw_map(t_env *e)
 		while (e->map[i][j])
 		{
 			ft_print_map(i, j, e);
-			// ft_draw_line(e, i, j, v);
 			j++;
 		}
 		i++;
@@ -123,7 +126,7 @@ void	draw_square(void *mlx, void *win)
 
 int		expose_hook(t_env *e)
 {
-	draw_square(e->mlx, e->win);
+	mlx_clear_window(e->mlx, e->win);
 	draw_map(e);
 	return (0);
 }
