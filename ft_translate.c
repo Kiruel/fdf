@@ -83,7 +83,7 @@ void	ft_translate_more(t_env *e)
 		while (e->map[coor_y][coor_x])
 		{
 			e->map[coor_y][coor_x]->x += VALEUR_T;
-			coor_x++;	
+			coor_x++;
 		}
 		coor_y++;
 	}

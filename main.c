@@ -132,9 +132,9 @@ int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == 65307)
 		exit(0);
-	write(1, "key: ", 5);
-	ft_putnbr(keycode);
-	ft_putchar('\n');
+	// write(1, "key: ", 5);
+	// ft_putnbr(keycode);
+	// ft_putchar('\n');
 	if (keycode == 65363)
 		ft_translate_more(e);
 	if (keycode == 65361)
@@ -147,10 +147,10 @@ int		key_hook(int keycode, t_env *e)
 		ft_rot_x(e);
 	if (keycode == 45 || keycode == 65453)
     	if (e->ecart > 0)
-        	e->ecart--;
+        	e->ecart -= 1;
     if (keycode == 61 || keycode == 65451)
     	if (e->ecart >= 0)
-        	e->ecart++;
+        	e->ecart += 1;
     if (keycode == 65365 || keycode == 108)
         e->scale += 0.1;
     if (keycode == 65366 || keycode == 59)
@@ -161,12 +161,10 @@ int		key_hook(int keycode, t_env *e)
 
 int 	main(int ac, char **av)
 {
-	t_data 	***list;
-	t_env	e;
+	t_env	*e;
 	int 	*size;
 
 	size = (int*)ft_memalloc(sizeof(int) * 2);
-
 	if (ac < 4)
 	{
 		size[0] = DEFAUT_X;
@@ -185,17 +183,19 @@ int 	main(int ac, char **av)
 		ft_putchar('\n');
 		return (0);
 	}
-	list = NULL;
-	list = ft_read_data(av);
-	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, size[0], size[1], "fdf");
-	e.map = list;
-	e.ecart = 20;
-	e.scale = 0.1;
-	mlx_key_hook(e.win, key_hook, &e);
-	mlx_expose_hook(e.win, expose_hook, &e);
+	if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
+	{
+		ft_putendl_fd("malloc error", 2);
+		exit(2);
+	}
+	ft_read_data(av[1], e);
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, size[0], size[1], "fdf");
+	e->ecart = 20;
+	e->scale = 0.1;
+	mlx_key_hook(e->win, key_hook, e);
+	mlx_expose_hook(e->win, expose_hook, e);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);
-	mlx_loop(e.mlx);
-	free(list);
+	mlx_loop(e->mlx);
 	return (0);
 }

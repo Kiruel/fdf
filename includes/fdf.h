@@ -23,20 +23,21 @@ typedef struct 	s_data
 	double		x;
 	double 		y;
 	double 		z;
+	double		s;
 }				t_data;
 
 typedef struct	s_env
 {
 	void 		*mlx;
 	void 		*win;
-	int			poil;
-	int 		ecart;
+	int			size;
+	double 		ecart;
 	double		scale;
 	t_data		***map;
 }				t_env;
 
 int			get_next_line(int const fd, char **line);
-t_data		***ft_read_data(char **av);
+void		ft_read_data(char *file, t_env *ret);
 void		ft_translate_down(t_env *e);
 void		ft_translate_up(t_env *e);
 void		ft_translate_more(t_env *e);
@@ -45,5 +46,12 @@ void		ft_rot_x(t_env *e);
 void		draw_point_white(t_env *e, int i, int j);
 void		draw_point(t_env *e, int i, int j);
 char		**ft_strsplit_fdf(char const *s);
+
+//error
+void		ft_close(int fd);
+int			ft_open(char *file);
+void		ft_map_error(void);
+void		ft_error(char *str);
+void		ft_mallerr(void);
 
 #endif

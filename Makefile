@@ -6,13 +6,13 @@
 #    By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/20 15:13:13 by etheodor          #+#    #+#              #
-#    Updated: 2014/11/24 16:30:50 by etheodor         ###   ########.fr        #
+#    Updated: 2014/12/31 09:36:11 by etheodor         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
-CFLAG = -Wall -Werror -Wextra
+CFLAG = -Wall -Werror -Wextra -g
 
 MINILIBX = -L/usr/x11/lib -lmlx -lXext -lX11
 
@@ -24,7 +24,8 @@ SOURCE = main.c \
 	ft_translate.c \
 	ft_draw_point.c \
 	ft_rot.c \
-	ft_strsplit_fdf.c
+	ft_strsplit_fdf.c \
+	ft_error.c
 
 POINTO = $(SOURCE:.c=.o)
 
