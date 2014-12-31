@@ -12,24 +12,32 @@
 
 #include "includes/fdf.h"
 
-/*void		ft_draw_line(t_env *e, int i, int j)
+void	ft_print_segment(int i, int j, t_env *e)
 {
+	int *x;
+	int *y;
+	int z;
 	int *v;
 
+	x = (int*)ft_memalloc(sizeof(int) * 2);
+	y = (int*)ft_memalloc(sizeof(int) * 2);
+	x[0] = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
+	y[0] = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
+	z = e->map[i][j]->z * e->ecart * e->scale;
+
+	x[1] = (e->map[i][j + 1]->x - e->map[i][j + 1]->y) * e->ecart + 500;
+	y[1] = (e->map[i + 1][j]->x + e->map[i + 1][j]->y) * (e->ecart)/2 + 250;
+
 	v = (int*)ft_memalloc(sizeof(int) * 10);
-	v[6] = e->map[i][j]->x * e->ecart;
-	v[8] = e->map[i][j]->y * (e->ecart)/2;
-	v[7] = e->map[i][j + 1]->x * e->ecart;
-	v[9] = e->map[i][j + 1]->y * (e->ecart)/2;
+	v[6] = x[0] * e->ecart;
+	v[8] = y[0] * (e->ecart)/2;
+	v[7] = x[1] * e->ecart;
+	v[9] = y[1] * (e->ecart)/2;
 	v[0] = abs(v[7] - v[6]);
 	v[2] = v[6] < v[7] ? 1 : -1;
 	v[1] = abs(v[9] - v[8]);
 	v[3] = v[8] < v[9] ? 1 : -1;
 	v[4] = (v[0] > v[1] ? v[0] : -v[1]) / 2;
-	ft_putnbr(v[6]);
-	ft_putchar(':');
-	ft_putnbr(v[8]);
-	ft_putchar('\n');
 	while (1)
 	{
 		mlx_pixel_put(e->mlx, e->win, v[6], v[8], 0xFFFFFF);
@@ -45,7 +53,7 @@
 		if (v[5] < v[1])
 			v[8] += v[3];
 	}
-}*/
+}
 
 void	ft_print_map(int i, int j, t_env *e)
 {
@@ -56,21 +64,18 @@ void	ft_print_map(int i, int j, t_env *e)
 	x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
 	y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
 	z = e->map[i][j]->z * e->ecart * e->scale;
-	if (e->map[i][j]->z < 0 && e->map[i][j]->z > -80)
+	if (e->map[i][j]->z <= 0 && e->map[i][j]->z > -80)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x00B5FF);
-	else if (e->map[i][j]->z < -81 && e->map[i][j]->z > -160)
+	else if (e->map[i][j]->z <= -80 && e->map[i][j]->z > -160)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x0061DB);
-	else if (e->map[i][j]->z < -160)
+	else if (e->map[i][j]->z <= -160)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x0048A3);
-	else if (e->map[i][j]->z > 0 && e->map[i][j]->z < 40)
+	else if (e->map[i][j]->z > 0 && e->map[i][j]->z <= 40)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0xF5D37D);
-	else if (e->map[i][j]->z > 41 && e->map[i][j]->z < 80)
+	else if (e->map[i][j]->z >= 40 && e->map[i][j]->z <= 80)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x157A0A);
-	else if (e->map[i][j]->z > 81 && e->map[i][j]->z < 400)
+	else if (e->map[i][j]->z >= 80 && e->map[i][j]->z < 400)
 		mlx_pixel_put(e->mlx, e->win, x, y - z, 0x523C0B);
-	else
-		mlx_pixel_put(e->mlx, e->win, x, y - z, COLOR_PIXEL);
-	// ft_print_segment(i, j, e);
 }
 
 void	draw_map(t_env *e)
@@ -80,33 +85,18 @@ void	draw_map(t_env *e)
 
 	i = 0;
 	j = 0;
+	ft_putnbr(e->map[i][j]->z);
 	while (e->map[i])
 	{
 		j = 0;
 		while (e->map[i][j])
 		{
 			ft_print_map(i, j, e);
+			// if (e->map[i][j + 1] && e->map[i + 1][j])
+			// 	ft_print_segment(e->map[i][j], e->map[i][j + 1], e);
 			j++;
 		}
 		i++;
-	}
-}
-
-void	draw_square(void *mlx, void *win)
-{
-	int x;
-	int y;
-
-	y = 0;
-	while (y < DEFAUT_Y)
-	{
-		x = 0;
-		while (x < DEFAUT_X)
-		{
-			mlx_pixel_put(mlx, win, x, y, 0x000000);
-			x++;
-		}
-		y++;
 	}
 }
 

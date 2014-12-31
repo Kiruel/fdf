@@ -22,7 +22,6 @@ SOURCE = main.c \
 	get_next_line.c \
 	ft_read_data.c \
 	ft_translate.c \
-	ft_draw_point.c \
 	ft_rot.c \
 	ft_strsplit_fdf.c \
 	ft_error.c

@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include "includes/fdf.h"
 
-static float ft_rad(float x)
+static double ft_rad(double x)
 {
-	const float Pi = 3.141592654f;
+	const double Pi = 3.141592653589;
 
 	return (x * Pi / 180);
 }
@@ -30,8 +30,8 @@ void	ft_rot_x(t_env *e)
 		coor_x = 0;
 		while (e->map[coor_y][coor_x])
 		{
-			e->map[coor_y][coor_x]->y = e->map[coor_y][coor_x]->y * cos(ft_rad(5)) - e->map[coor_y][coor_x]->z * sin(ft_rad(5)); 
-			e->map[coor_y][coor_x]->z = e->map[coor_y][coor_x]->y * sin(ft_rad(5)) + e->map[coor_y][coor_x]->z * cos(ft_rad(5));
+			e->map[coor_y][coor_x]->y = e->map[coor_y][coor_x]->y * cos(ft_rad(10)) - e->map[coor_y][coor_x]->z * sin(ft_rad(10)); 
+			e->map[coor_y][coor_x]->z = e->map[coor_y][coor_x]->y * sin(ft_rad(10)) + e->map[coor_y][coor_x]->z * cos(ft_rad(10));
 			coor_x++;
 		}
 		coor_y++;

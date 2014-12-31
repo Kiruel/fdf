@@ -13,7 +13,6 @@
 # define FDF_H
 # define DEFAUT_X		1200
 # define DEFAUT_Y		800
-# define COLOR_PIXEL	0xFCFFFE
 # include "mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -49,8 +48,6 @@ void		ft_translate_up(t_env *e);
 void		ft_translate_more(t_env *e);
 void		ft_translate_less(t_env *e);
 void		ft_rot_x(t_env *e);
-void		draw_point_white(t_env *e, int i, int j);
-void		draw_point(t_env *e, int i, int j);
 char		**ft_strsplit_fdf(char const *s);
 
 //error
