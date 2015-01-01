@@ -13,6 +13,7 @@
 # define FDF_H
 # define DEFAUT_X		1200
 # define DEFAUT_Y		800
+# define COLOR			0xFFFFFF
 # include "mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -41,14 +42,23 @@ typedef struct	s_env
 	double		delta_z;
 }				t_env;
 
+//read data
 int			get_next_line(int const fd, char **line);
 void		ft_read_data(char *file, t_env *ret);
+char		**ft_strsplit_fdf(char const *s);
+
+//translate and rotate
 void		ft_translate_down(t_env *e);
 void		ft_translate_up(t_env *e);
 void		ft_translate_more(t_env *e);
 void		ft_translate_less(t_env *e);
 void		ft_rot_x(t_env *e);
-char		**ft_strsplit_fdf(char const *s);
+
+//print map
+void		ft_print_map(int i, int j, t_env *e);
+void		ft_print_segment_right(int i, int j, t_env *e);
+void		ft_print_segment_down(int i, int j, t_env *e);
+void		draw_map(t_env *e);
 
 //error
 void		ft_close(int fd);

@@ -24,7 +24,8 @@ SOURCE = main.c \
 	ft_translate.c \
 	ft_rot.c \
 	ft_strsplit_fdf.c \
-	ft_error.c
+	ft_error.c \
+	ft_print_map.c
 
 POINTO = $(SOURCE:.c=.o)
 
