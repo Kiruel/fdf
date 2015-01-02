@@ -36,7 +36,12 @@ int		expose_hook(t_env *e)
 int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == 65307)
+	{
+		free(e);
+		while (42)
+			;
 		exit(0);
+	}
 	// write(1, "key: ", 5);
 	// ft_putnbr(keycode);
 	// ft_putchar('\n');
@@ -70,17 +75,9 @@ int 	main(int ac, char **av)
 	int 	*size;
 
 	size = (int*)ft_memalloc(sizeof(int) * 2);
-	if (ac < 4)
-	{
-		size[0] = DEFAUT_X;
-		size[1] = DEFAUT_Y;
-	}
-	else
-	{
-		size[0] = ft_atoi(av[2]);
-		size[1] = ft_atoi(av[3]);
-	}
-	if (ac > 4)
+	size[0] = DEFAUT_X;
+	size[1] = DEFAUT_Y;
+	if (ac > 2)
 		return (0);
 	if (ac < 2)
 	{
@@ -89,10 +86,7 @@ int 	main(int ac, char **av)
 		return (0);
 	}
 	if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
-	{
-		ft_putendl_fd("malloc error", 2);
-		exit(2);
-	}
+		ft_mallerr();
 	ft_read_data(av[1], e);
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, size[0], size[1], "fdf");
@@ -100,6 +94,7 @@ int 	main(int ac, char **av)
 	e->scale = 0.1;
 	mlx_key_hook(e->win, key_hook, e);
 	mlx_expose_hook(e->win, expose_hook, e);
+	free(size);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);
 	mlx_loop(e->mlx);
 	return (0);

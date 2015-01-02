@@ -55,7 +55,6 @@ void		ft_translate_less(t_env *e);
 void		ft_rot_x(t_env *e);
 
 //print map
-// void		ft_print_map(int i, int j, t_env *e);
 void		ft_print_segment_right(int i, int j, t_env *e);
 void		ft_print_segment_down(int i, int j, t_env *e);
 void		draw_map(t_env *e);
