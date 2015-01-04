@@ -38,8 +38,6 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == 65307)
 	{
 		free(e);
-		while (42)
-			;
 		exit(0);
 	}
 	// write(1, "key: ", 5);
