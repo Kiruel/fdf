@@ -22,8 +22,8 @@ void 	ft_print_color(t_env *e, int x, int y, int i, int j)
 {
 	(void)i;
 	(void)j;
-	if (e->map[i][j]->z > 0)
-		ft_print_pixel(e, x, y, 0xBC10C7);
+	if (e->map[i][j]->z == 10)
+		ft_print_pixel(e, x, y, 0xFFFFFF);
 	else
 		ft_print_pixel(e, x, y, 0xFFFFFF);
 }
@@ -100,16 +100,20 @@ void	draw_map(t_env *e)
 
 	i = 0;
 	j = 0;
-	while (e->map[i])
+	while (i < e->size)
 	{
-		j = 0;
-		while (e->map[i][j])
+		if (e->map[i])
 		{
-			if (e->map[i][j + 1] && e->map[i][j])
-				ft_print_segment_right(i, j, e);
-			if (e->map[i + 1] && e->map[i + 1][j])
-				ft_print_segment_down(i, j, e);
-			j++;
+			j = 0;
+			while (e->map[i][j])
+			{
+				if (e->map[i][j + 1] && e->map[i][j])
+					ft_print_segment_right(i, j, e);
+				if (e->map[i + 1])
+					if (e->map[i + 1][j])
+						ft_print_segment_down(i, j, e);
+				j++;
+			}			
 		}
 		i++;
 	}

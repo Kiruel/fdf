@@ -15,76 +15,88 @@
 
 void	ft_translate_down(t_env *e)
 {
-	int coor_x;
-	int coor_y;
+	int i;
+	int j;
 
-	coor_x = 0;
-	coor_y = 0;
-	while (e->map[coor_y])
+	i = 0;
+	j = 0;
+	while (i < e->size)
 	{
-		coor_x = 0;
-		while (e->map[coor_y][coor_x])
+		if (e->map[i])
 		{
-			e->map[coor_y][coor_x]->y += VALEUR_T;
-			coor_x++;
+			j = 0;
+			while (e->map[i][j])
+			{
+				e->map[i][j]->y += VALEUR_T;
+				j++;
+			}			
 		}
-		coor_y++;
+		i++;
 	}
 }
 
 void	ft_translate_up(t_env *e)
 {
-	int coor_x;
-	int coor_y;
+	int i;
+	int j;
 
-	coor_x = 0;
-	coor_y = 0;
-	while (e->map[coor_y])
+	i = 0;
+	j = 0;
+	while (i < e->size)
 	{
-		coor_x = 0;
-		while (e->map[coor_y][coor_x])
+		if (e->map[i])
 		{
-			e->map[coor_y][coor_x]->y -= VALEUR_T;
-			coor_x++;
+			j = 0;
+			while (e->map[i][j])
+			{
+				e->map[i][j]->y -= VALEUR_T;
+				j++;
+			}			
 		}
-		coor_y++;
+		i++;
 	}
 }
 
 void	ft_translate_less(t_env *e)
 {
-	int coor_x;
-	int coor_y;
+	int i;
+	int j;
 
-	coor_x = 0;
-	coor_y = 0;
-	while (e->map[coor_y])
+	i = 0;
+	j = 0;
+	while (i < e->size)
 	{
-		coor_x = 0;
-		while (e->map[coor_y][coor_x])
+		if (e->map[i])
 		{
-			e->map[coor_y][coor_x]->x -= VALEUR_T;
-			coor_x++;
+			j = 0;
+			while (e->map[i][j])
+			{
+				e->map[i][j]->x -= VALEUR_T;
+				j++;
+			}			
 		}
-		coor_y++;
+		i++;
 	}
 }
 
 void	ft_translate_more(t_env *e)
 {
-	int coor_x;
-	int coor_y;
+	int i;
+	int j;
 
-	coor_x = 0;
-	coor_y = 0;
-	while (e->map[coor_y])
+	i = 0;
+	j = 0;
+	while (i < e->size)
 	{
-		coor_x = 0;
-		while (e->map[coor_y][coor_x])
+		if (e->map[i])
 		{
-			e->map[coor_y][coor_x]->x += VALEUR_T;
-			coor_x++;
+			j = 0;
+			while (e->map[i][j])
+			{
+				e->map[i][j]->x += VALEUR_T;
+				j++;
+			}			
 		}
-		coor_y++;
+		i++;
 	}
 }
