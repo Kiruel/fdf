@@ -34,6 +34,7 @@ typedef struct	s_env
 	void 		*mlx;
 	void 		*win;
 	int			size;
+	int			width;
 	double 		ecart;
 	double		scale;
 	t_data		***map;

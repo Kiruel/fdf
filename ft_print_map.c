@@ -105,10 +105,10 @@ void	draw_map(t_env *e)
 		j = 0;
 		while (e->map[i][j])
 		{
-			if (e->map[i][j + 1])
+			if (e->map[i][j + 1] && e->map[i][j])
 				ft_print_segment_right(i, j, e);
-			// if (i < e->size - 1)
-			// 	ft_print_segment_down(i, j, e);
+			if (e->map[i + 1] && e->map[i + 1][j])
+				ft_print_segment_down(i, j, e);
 			j++;
 		}
 		i++;
