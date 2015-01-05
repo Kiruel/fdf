@@ -6,13 +6,13 @@
 #    By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/20 15:13:13 by etheodor          #+#    #+#              #
-#    Updated: 2014/12/31 09:36:11 by etheodor         ###   ########.fr        #
+#    Updated: 2015/01/05 09:44:47 by etheodor         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = fdf
 
-CFLAG = -Wall -Werror -Wextra -g
+CFLAG = -Wall -Werror -Wextra
 
 MINILIBX = -L/usr/x11/lib -lmlx -lXext -lX11
 
@@ -36,13 +36,13 @@ $(NAME):
 	@make -C libft/ fclean
 	@make -C libft
 	@make -C libft/ clean
-	@gcc -c $(CFLAG) $(SOURCE) -I $(LIBFT)
+	@gcc -c -g $(CFLAG) $(SOURCE) -I $(LIBFT)
 	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 
 test:
-	@cc -c $(CFLAG) $(SOURCE)
-	@cc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
+	@gcc -c -g $(CFLAG) $(SOURCE)
+	@gcc $(CFLAG) -o $(NAME) $(POINTO) ./libft/libft.a -L/usr/x11/lib -lmlx -lXext -lX11
 	@make clean
 	@echo "test: OK"
 

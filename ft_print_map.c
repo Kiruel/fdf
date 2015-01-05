@@ -107,8 +107,8 @@ void	draw_map(t_env *e)
 		{
 			if (e->map[i][j + 1])
 				ft_print_segment_right(i, j, e);
-			if (i < e->size - 1)
-				ft_print_segment_down(i, j, e);
+			// if (i < e->size - 1)
+			// 	ft_print_segment_down(i, j, e);
 			j++;
 		}
 		i++;
