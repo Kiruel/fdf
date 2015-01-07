@@ -87,6 +87,7 @@ void	ft_print_segment_down(int i, int j, t_env *e)
 	pts1[0] = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
 	pts1[1] = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
 	pts1[2] = e->map[i][j]->z * e->ecart * e->scale;
+	// ft_putchar('e');
 	pts2[0] = (e->map[i + 1][j]->x - e->map[i + 1][j]->y) * e->ecart + 500;
 	pts2[1] = (e->map[i + 1][j]->x + e->map[i + 1][j]->y) * (e->ecart)/2 + 250;
 	pts2[2] = e->map[i + 1][j]->z * e->ecart * e->scale;
@@ -100,7 +101,7 @@ void	draw_map(t_env *e)
 
 	i = 0;
 	j = 0;
-	while (i < e->size)
+	while (i < e->size + 1)
 	{
 		if (e->map[i])
 		{

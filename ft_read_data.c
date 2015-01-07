@@ -30,7 +30,7 @@ static t_data	**ft_add_entry(char *buf, int y)
 	int			width;
 	char		**value;
 
-	value = ft_strsplit(buf, ' ');
+	value = ft_strsplit_fdf(buf);
 	i = ft_map_width(value);
 	x = -1;
 	width = 0;
@@ -44,10 +44,10 @@ static t_data	**ft_add_entry(char *buf, int y)
 		line[x]->x = width;
 		line[x]->y = y;
 		line[x]->s = 1;
-		free(value[x]);
+		// free(value[x]);
 		width++;
 	}
-	free(value);
+	// free(value);
 	return (i ? line : NULL);
 }
 

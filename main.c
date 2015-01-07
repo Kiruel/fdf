@@ -88,7 +88,7 @@ int 	main(int ac, char **av)
 	ft_read_data(av[1], e);
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, size[0], size[1], "fdf");
-	free(size);	
+	// free(size);
 	e->ecart = 20;
 	e->scale = 0.1;
 	mlx_key_hook(e->win, key_hook, e);
