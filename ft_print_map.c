@@ -25,9 +25,9 @@ void 	ft_print_color(t_env *e, int x, int y, int i, int j)
 	if (e->map[i][j + 1])
 	{
 		if (e->map[i][j + 1]->z >= 10 || e->map[i][j]->z >= 10)
-			ft_print_pixel(e, x, y, 0xFFFFFF);
+			ft_print_pixel(e, x, y, 0xFF0000);
 		else
-			ft_print_pixel(e, x, y, 0xFF0000);		
+			ft_print_pixel(e, x, y, 0xFFFFFF);		
 	}
 }
 
@@ -38,9 +38,9 @@ void 	ft_print_color2(t_env *e, int x, int y, int i, int j)
 	if (e->map[i + 1][j])
 	{
 		if (e->map[i + 1][j]->z >= 10 || e->map[i][j]->z >= 10)
-			ft_print_pixel(e, x, y, 0xFFFFFF);
+			ft_print_pixel(e, x, y, 0xFF0000);
 		else
-			ft_print_pixel(e, x, y, 0xFF0000);		
+			ft_print_pixel(e, x, y, 0xFFFFFF);		
 	}
 }
 
