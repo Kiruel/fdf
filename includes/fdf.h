@@ -33,7 +33,12 @@ typedef struct	s_env
 {
 	void 		*mlx;
 	void 		*win;
+	void 		*img;
+	char		*pimg;
+	int			bpp;
+	int			endian;
 	int			size;
+	int			size_line;
 	int			width;
 	double 		ecart;
 	double		scale;
@@ -59,6 +64,8 @@ void		ft_rot_x(t_env *e);
 void		ft_print_segment_right(int i, int j, t_env *e);
 void		ft_print_segment_down(int i, int j, t_env *e);
 void		draw_map(t_env *e);
+int			ft_update_img(t_env *ret, void f(t_env *ret));
+void		ft_put_pixel_to_image(t_env *ret, int x, int y, int color);
 
 //error
 void		ft_close(int fd);

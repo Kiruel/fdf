@@ -28,8 +28,8 @@
 
 int		expose_hook(t_env *e)
 {
-	mlx_clear_window(e->mlx, e->win);
-	draw_map(e);
+	// mlx_clear_window(e->mlx, e->win);
+	ft_update_img(e, draw_map);
 	return (0);
 }
 
@@ -37,6 +37,7 @@ int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == 65307)
 	{
+		mlx_destroy_window(e->mlx, e->win);
 		free(e);
 		exit(0);
 	}

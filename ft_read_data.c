@@ -22,7 +22,7 @@ static int		ft_map_width(char **value)
 	return (i);
 }
 
-static t_data	**ft_add_entry(char *buf, int y)
+static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 {
 	t_data		**line;
 	int			i;
@@ -47,7 +47,8 @@ static t_data	**ft_add_entry(char *buf, int y)
 		// free(value[x]);
 		width++;
 	}
-	// free(value);
+	ret->size_line = width;
+	free(value);
 	return (i ? line : NULL);
 }
 
@@ -87,7 +88,7 @@ void			ft_read_data(char *file, t_env *ret)
 	fd = ft_open(file);
 	while ((rt = get_next_line(fd, &buf)) > 0)
 	{
-		ret->map[ret->size] = ft_add_entry(buf, height);
+		ret->map[ret->size] = ft_add_entry(buf, height, ret);
 		free(buf);
 		ret->size++;
 		height++;
