@@ -22,7 +22,6 @@ SOURCE = ./srcs/main.c \
 	./srcs/get_next_line.c \
 	./srcs/ft_read_data.c \
 	./srcs/ft_translate.c \
-	./srcs/ft_rot.c \
 	./srcs/ft_error.c \
 	./srcs/ft_print_map.c \
 	./srcs/ft_mlx_tools.c
@@ -31,7 +30,6 @@ POINTO = main.o \
 	get_next_line.o \
 	ft_read_data.o \
 	ft_translate.o \
-	ft_rot.o \
 	ft_error.o \
 	ft_print_map.o \
 	ft_mlx_tools.o

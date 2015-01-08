@@ -1,4 +1,4 @@
-**bold** Projet FDF :**bold**
+						**Projet FDF**
 
 Creer une representation graphique d'une map rentre en parametre.
 
