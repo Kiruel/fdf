@@ -9,7 +9,7 @@
 /*   Updated: 2014/12/29 12:06:25 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "includes/fdf.h"
+#include "fdf.h"
 
 static double ft_rad(double x)
 {

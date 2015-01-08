@@ -12,22 +12,29 @@
 
 NAME = fdf
 
-CFLAG = -Wall -Werror -Wextra
+CFLAG = -Wall -Werror -Wextra -I ./includes
 
 MINILIBX = -L/usr/x11/lib -lmlx -lXext -lX11
 
 LIBFT = ./libft/includes
 
-SOURCE = main.c \
-	get_next_line.c \
-	ft_read_data.c \
-	ft_translate.c \
-	ft_rot.c \
-	ft_error.c \
-	ft_print_map.c \
-	ft_mlx_tools.c
+SOURCE = ./srcs/main.c \
+	./srcs/get_next_line.c \
+	./srcs/ft_read_data.c \
+	./srcs/ft_translate.c \
+	./srcs/ft_rot.c \
+	./srcs/ft_error.c \
+	./srcs/ft_print_map.c \
+	./srcs/ft_mlx_tools.c
 
-POINTO = $(SOURCE:.c=.o)
+POINTO = main.o \
+	get_next_line.o \
+	ft_read_data.o \
+	ft_translate.o \
+	ft_rot.o \
+	ft_error.o \
+	ft_print_map.o \
+	ft_mlx_tools.o
 
 all: $(NAME)
 	@echo "all: OK"

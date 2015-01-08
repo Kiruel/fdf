@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fdf.h"
+#include "fdf.h"
 
 /*int		mouse_hook(int buttons, int x, int y, t_env *e)
 {

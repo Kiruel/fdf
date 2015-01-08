@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fdf.h"
+#include "fdf.h"
 
 void	ft_print_pixel(t_env *e, int x, int y, int color)
 {

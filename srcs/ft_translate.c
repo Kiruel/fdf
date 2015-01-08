@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fdf.h"
+#include "fdf.h"
 #define VALEUR_T	3
 
 void	ft_translate_down(t_env *e)

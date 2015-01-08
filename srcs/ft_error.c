@@ -9,7 +9,7 @@
 /*   Updated: 2014/12/31 10:47:21 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "includes/fdf.h"
+#include "fdf.h"
 
 void	ft_mallerr(void)
 {

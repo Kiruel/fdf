@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/fdf.h"
+#include "fdf.h"
 
 void	ft_put_pixel_to_image(t_env *ret, int x, int y, int color)
 {
