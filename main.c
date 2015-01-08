@@ -91,7 +91,7 @@ int 	main(int ac, char **av)
 	// free(size);
 	e->ecart = 20;
 	e->scale = 0.1;
-	mlx_key_hook(e->win, key_hook, e);
+	mlx_hook(e->win, 2, 3, key_hook, e);
 	mlx_expose_hook(e->win, expose_hook, e);
 	// mlx_mouse_hook(e.win, mouse_hook, &e);
 	mlx_loop(e->mlx);

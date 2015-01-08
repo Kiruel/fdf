@@ -14,7 +14,7 @@
 
 void	ft_print_pixel(t_env *e, int x, int y, int color)
 {
-	if ((x - 1 <= DEFAUT_X && x >= 1) && (y - 1 <= DEFAUT_Y && y >= 1))
+	if ((x < DEFAUT_X && x > 0) && (y < DEFAUT_Y && y > 0))
 		ft_put_pixel_to_image(e, x, y, color);
 }
 
