@@ -44,6 +44,7 @@ static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 		line[x]->x = width;
 		line[x]->y = y;
 		line[x]->s = 1;
+		free(value[x]);
 		width++;
 	}
 	ret->size_line = width;

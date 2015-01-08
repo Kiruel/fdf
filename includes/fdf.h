@@ -50,6 +50,7 @@ typedef struct	s_env
 	int			*pts2;
 	int			a;
 	int			b;
+	int			*v;
 }				t_env;
 
 //read data
@@ -57,10 +58,7 @@ int			get_next_line(int const fd, char **line);
 void		ft_read_data(char *file, t_env *ret);
 
 //translate and rotate
-void		ft_translate_down(t_env *e);
-void		ft_translate_up(t_env *e);
-void		ft_translate_more(t_env *e);
-void		ft_translate_less(t_env *e);
+void		ft_translate(t_env *e, int a, int b);
 void		ft_rot_x(t_env *e);
 
 //print map

@@ -13,29 +13,19 @@
 #include "fdf.h"
 #define VALEUR_T	3
 
-void	ft_translate_down(t_env *e)
+void	ft_translate2(t_env *e, int i, int j, int a, int b)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < e->size)
-	{
-		if (e->map[i])
-		{
-			j = 0;
-			while (e->map[i][j])
-			{
-				e->map[i][j]->y += VALEUR_T;
-				j++;
-			}			
-		}
-		i++;
-	}
+	if (a == 0 && b == 0)
+		e->map[i][j]->x += VALEUR_T;
+	if (a == 0 && b == 1)
+		e->map[i][j]->x -= VALEUR_T;
+	if (a == 1 && b == 0)
+		e->map[i][j]->y -= VALEUR_T;
+	if (a == 1 && b == 1)
+		e->map[i][j]->y += VALEUR_T;
 }
 
-void	ft_translate_up(t_env *e)
+void	ft_translate(t_env *e, int a, int b)
 {
 	int i;
 	int j;
@@ -49,51 +39,7 @@ void	ft_translate_up(t_env *e)
 			j = 0;
 			while (e->map[i][j])
 			{
-				e->map[i][j]->y -= VALEUR_T;
-				j++;
-			}			
-		}
-		i++;
-	}
-}
-
-void	ft_translate_less(t_env *e)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < e->size)
-	{
-		if (e->map[i])
-		{
-			j = 0;
-			while (e->map[i][j])
-			{
-				e->map[i][j]->x -= VALEUR_T;
-				j++;
-			}			
-		}
-		i++;
-	}
-}
-
-void	ft_translate_more(t_env *e)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < e->size)
-	{
-		if (e->map[i])
-		{
-			j = 0;
-			while (e->map[i][j])
-			{
-				e->map[i][j]->x += VALEUR_T;
+				ft_translate2(e, i, j, a, b);
 				j++;
 			}			
 		}

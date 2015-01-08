@@ -33,49 +33,42 @@ void 	ft_print_color(t_env *e, int x, int y, int i, int j)
 
 void 	ft_print_segment(t_env *e, int i, int j)
 {
-	int *v;
-
-	v = (int*)ft_memalloc(sizeof(int) * 10);
-	v[6] = e->pts1[0];
-	v[8] = e->pts1[1] - e->pts1[2];
-	v[7] = e->pts2[0];
-	v[9] = e->pts2[1] - e->pts2[2];
-	v[0] = abs(v[7] - v[6]);
-	v[2] = v[6] < v[7] ? 1 : -1;
-	v[1] = abs(v[9] - v[8]);
-	v[3] = v[8] < v[9] ? 1 : -1;
-	v[4] = (v[0] > v[1] ? v[0] : -v[1]) / 2;
+	e->v[6] = e->pts1[0];
+	e->v[8] = e->pts1[1] - e->pts1[2];
+	e->v[7] = e->pts2[0];
+	e->v[9] = e->pts2[1] - e->pts2[2];
+	e->v[0] = abs(e->v[7] - e->v[6]);
+	e->v[2] = e->v[6] < e->v[7] ? 1 : -1;
+	e->v[1] = abs(e->v[9] - e->v[8]);
+	e->v[3] = e->v[8] < e->v[9] ? 1 : -1;
+	e->v[4] = (e->v[0] > e->v[1] ? e->v[0] : -(e->v[1])) / 2;
 	while (1)
 	{
-		ft_print_color(e, v[6], v[8], i, j);
-		if ((v[6] == v[7]) && (v[8] == v[9]))
+		ft_print_color(e, e->v[6], e->v[8], i, j);
+		if ((e->v[6] == e->v[7]) && (e->v[8] == e->v[9]))
 			break ;
-		v[5] = v[4];
-		if (v[5] > -v[0])
-			v[4] -= v[1];
-		if (v[5] > -v[0])
-			v[6] += v[2];
-		if (v[5] < v[1])
-			v[4] += v[0];
-		if (v[5] < v[1])
-			v[8] += v[3];
+		e->v[5] = e->v[4];
+		if (e->v[5] > -(e->v[0]))
+			e->v[4] -= e->v[1];
+		if (e->v[5] > -(e->v[0]))
+			e->v[6] += e->v[2];
+		if (e->v[5] < e->v[1])
+			e->v[4] += e->v[0];
+		if (e->v[5] < e->v[1])
+			e->v[8] += e->v[3];
 	}
-	free(e->pts1);
-	free(e->pts2);
 }
 
 void	ft_print_segment_all(int i, int j, t_env *e, int a, int b)
 {
-	e->pts1 = (int*)ft_memalloc(sizeof(int) * 3);
-	e->pts2 = (int*)ft_memalloc(sizeof(int) * 3);
+	e->a = a;
+	e->b = b;
 	e->pts1[0] = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
 	e->pts1[1] = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
 	e->pts1[2] = e->map[i][j]->z * e->ecart * e->scale;
 	e->pts2[0] = (e->map[i + a][j + b]->x - e->map[i + a][j + b]->y) * e->ecart + 500;
 	e->pts2[1] = (e->map[i + a][j + b]->x + e->map[i + a][j + b]->y) * (e->ecart)/2 + 250;
 	e->pts2[2] = e->map[i + a][j + b]->z * e->ecart * e->scale;
-	e->a = a;
-	e->b = b;
 	ft_print_segment(e, i, j);
 }
 
@@ -86,6 +79,8 @@ void	draw_map(t_env *e)
 
 	i = 0;
 	j = 0;
+	e->pts1 = (int*)ft_memalloc(sizeof(int) * 3);
+	e->pts2 = (int*)ft_memalloc(sizeof(int) * 3);
 	while (i < e->size + 1)
 	{
 		if (e->map[i])
@@ -103,4 +98,6 @@ void	draw_map(t_env *e)
 		}
 		i++;
 	}
+	free(e->pts1);
+	free(e->pts2);
 }

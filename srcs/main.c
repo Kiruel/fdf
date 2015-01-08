@@ -12,6 +12,18 @@
 
 #include "fdf.h"
 
+void	ft_translate_map(int keycode, t_env *e)
+{
+	if (keycode == 65363)
+		ft_translate(e, 0, 0);
+	if (keycode == 65361)
+		ft_translate(e, 0, 1);
+	if (keycode == 65362)
+		ft_translate(e, 1, 0);
+	if (keycode == 65364)
+		ft_translate(e, 1, 1);
+}
+
 int		expose_hook(t_env *e)
 {
 	ft_update_img(e, draw_map);
@@ -26,14 +38,7 @@ int		key_hook(int keycode, t_env *e)
 		free(e);
 		exit(0);
 	}
-	if (keycode == 65363)
-		ft_translate_more(e);
-	if (keycode == 65361)
-		ft_translate_less(e);
-	if (keycode == 65362)
-		ft_translate_up(e);
-	if (keycode == 65364)
-		ft_translate_down(e);
+	ft_translate_map(keycode, e);
 	if (keycode == 45 || keycode == 65453)
 		if (e->ecart > 0)
 			e->ecart -= 1;
@@ -66,6 +71,7 @@ int 	main(int ac, char **av)
 	}
 	if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
 		ft_mallerr();
+	e->v = (int*)ft_memalloc(sizeof(int) * 10);
 	ft_read_data(av[1], e);
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, size[0], size[1], "fdf");
