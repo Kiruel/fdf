@@ -12,7 +12,7 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF 10000
+# define BUFF 1000
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>

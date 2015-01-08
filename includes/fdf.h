@@ -46,12 +46,15 @@ typedef struct	s_env
 	double		delta_x;
 	double		delta_y;
 	double		delta_z;
+	int			*pts1;
+	int			*pts2;
+	int			a;
+	int			b;
 }				t_env;
 
 //read data
 int			get_next_line(int const fd, char **line);
 void		ft_read_data(char *file, t_env *ret);
-char		**ft_strsplit_fdf(char const *s);
 
 //translate and rotate
 void		ft_translate_down(t_env *e);

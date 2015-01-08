@@ -23,7 +23,6 @@ SOURCE = main.c \
 	ft_read_data.c \
 	ft_translate.c \
 	ft_rot.c \
-	ft_strsplit_fdf.c \
 	ft_error.c \
 	ft_print_map.c \
 	ft_mlx_tools.c
