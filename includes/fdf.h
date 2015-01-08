@@ -51,24 +51,25 @@ typedef struct	s_env
 	int			a;
 	int			b;
 	int			*v;
+	int			x;
 }				t_env;
 
-//read data
+/*read data*/
 int			get_next_line(int const fd, char **line);
 void		ft_read_data(char *file, t_env *ret);
 
-//translate and rotate
+/*translate and rotate*/
 void		ft_translate(t_env *e, int a, int b);
 void		ft_rot_x(t_env *e);
 
-//print map
+/*print map*/
 void		ft_print_segment_right(int i, int j, t_env *e);
 void		ft_print_segment_down(int i, int j, t_env *e);
 void		draw_map(t_env *e);
 int			ft_update_img(t_env *ret, void f(t_env *ret));
 void		ft_put_pixel_to_image(t_env *ret, int x, int y, int color);
 
-//error
+/*error*/
 void		ft_close(int fd);
 int			ft_open(char *file);
 void		ft_map_error(void);

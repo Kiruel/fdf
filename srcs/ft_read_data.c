@@ -26,25 +26,24 @@ static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 {
 	t_data		**line;
 	int			i;
-	int			x;
 	int			width;
 	char		**value;
 
 	value = ft_strsplit(buf, ' ');
 	i = ft_map_width(value);
-	x = -1;
+	ret->x = -1;
 	width = 0;
 	if ((line = (t_data**)ft_memalloc(sizeof(t_data*) * i + 1)) == NULL)
 		ft_mallerr();
-	while (++x < i)
+	while (++ret->x < i)
 	{
-		if ((line[x] = (t_data*)ft_memalloc(sizeof(t_data))) == NULL)
+		if ((line[ret->x] = (t_data*)ft_memalloc(sizeof(t_data))) == NULL)
 			ft_mallerr();
-		line[x]->z = ft_atoi(value[x]);
-		line[x]->x = width;
-		line[x]->y = y;
-		line[x]->s = 1;
-		free(value[x]);
+		line[ret->x]->z = ft_atoi(value[ret->x]);
+		line[ret->x]->x = width;
+		line[ret->x]->y = y;
+		line[ret->x]->s = 1;
+		free(value[ret->x]);
 		width++;
 	}
 	ret->size_line = width;
