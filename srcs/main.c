@@ -26,7 +26,11 @@ void	ft_translate_map(int keycode, t_env *e)
 
 int		expose_hook(t_env *e)
 {
+	e->pts1 = (int*)ft_memalloc(sizeof(int) * 3);
+	e->pts2 = (int*)ft_memalloc(sizeof(int) * 3);
 	ft_update_img(e, draw_map);
+	free(e->pts1);
+	free(e->pts2);
 	return (0);
 }
 
