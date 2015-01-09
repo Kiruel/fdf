@@ -13,7 +13,10 @@
 # define FDF_H
 # define DEFAUT_X		1200
 # define DEFAUT_Y		800
-# define COLOR			0xFFFFFF
+# define WHITE			0xFFFFFF
+# define ORANGE			0xCCC400
+# define BLUE			0x32AAFF
+# define GREEN			0x107800
 # include "mlx.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -28,6 +31,13 @@ typedef struct 	s_data
 	double 		z;
 	double		s;
 }				t_data;
+
+typedef struct 	s_pts
+{
+	int			x;
+	int			y;
+	int			z;
+}				t_pts;
 
 typedef struct	s_env
 {
@@ -46,8 +56,8 @@ typedef struct	s_env
 	double		delta_x;
 	double		delta_y;
 	double		delta_z;
-	int			*pts1;
-	int			*pts2;
+	t_pts		pts1;
+	t_pts		pts2;
 	int			a;
 	int			b;
 	int			*v;

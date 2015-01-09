@@ -24,10 +24,15 @@ void 	ft_print_color(t_env *e, int x, int y, int i, int j)
 	(void)j;
 	if (e->map[i + e->a][j + e->b])
 	{
-		if (e->map[i + e->a][j + e->b]->z >= 10 || e->map[i][j]->z >= 10)
-			ft_print_pixel(e, x, y, 0xFF0000);
+		if (e->map[i + e->a][j + e->b]->z <= 0 || e->map[i][j]->z <= 0)
+			ft_print_pixel(e, x, y, BLUE);
+		else if ((e->map[i + e->a][j + e->b]->z >= 1 || e->map[i][j]->z >= 1)
+			&& (e->map[i + e->a][j + e->b]->z <= 3 || e->map[i][j]->z <= 3))
+			ft_print_pixel(e, x, y, ORANGE);
+		else if (e->map[i + e->a][j + e->b]->z >= 4 || e->map[i][j]->z >= 4)
+			ft_print_pixel(e, x, y, GREEN);
 		else
-			ft_print_pixel(e, x, y, 0xFFFFFF);
+			ft_print_pixel(e, x, y, WHITE);
 	}
 }
 
@@ -59,16 +64,16 @@ void	ft_print_segment_all(int i, int j, t_env *e, int a, int b)
 {
 	e->a = a;
 	e->b = b;
-	e->pts1[0] = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
-	e->pts1[1] = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
-	e->pts1[2] = e->map[i][j]->z * e->ecart * e->scale;
-	e->pts2[0] = (e->map[i + a][j + b]->x - e->map[i + a][j + b]->y) * e->ecart + 500;
-	e->pts2[1] = (e->map[i + a][j + b]->x + e->map[i + a][j + b]->y) * (e->ecart)/2 + 250;
-	e->pts2[2] = e->map[i + a][j + b]->z * e->ecart * e->scale;
-	e->v[6] = e->pts1[0];
-	e->v[8] = e->pts1[1] - e->pts1[2];
-	e->v[7] = e->pts2[0];
-	e->v[9] = e->pts2[1] - e->pts2[2];
+	e->pts1.x = (e->map[i][j]->x - e->map[i][j]->y) * e->ecart + 500;
+	e->pts1.y = (e->map[i][j]->x + e->map[i][j]->y) * (e->ecart)/2 + 250;
+	e->pts1.z = e->map[i][j]->z * e->ecart * e->scale;
+	e->pts2.x = (e->map[i + a][j + b]->x - e->map[i + a][j + b]->y) * e->ecart + 500;
+	e->pts2.y = (e->map[i + a][j + b]->x + e->map[i + a][j + b]->y) * (e->ecart)/2 + 250;
+	e->pts2.z = e->map[i + a][j + b]->z * e->ecart * e->scale;
+	e->v[6] = e->pts1.x;
+	e->v[8] = e->pts1.y - e->pts1.z;
+	e->v[7] = e->pts2.x;
+	e->v[9] = e->pts2.y - e->pts2.z;
 	if (((e->v[6] <= DEFAUT_X && e->v[6] >= 0) && (e->v[8] <= DEFAUT_Y &&
 		e->v[8] >= 0)) || ((e->v[7] <= DEFAUT_X && e->v[7] >= 0) &&
 		(e->v[9] <= DEFAUT_Y && e->v[9] >= 0)))

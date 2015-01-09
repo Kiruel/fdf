@@ -26,13 +26,7 @@ void	ft_translate_map(int keycode, t_env *e)
 
 int		expose_hook(t_env *e)
 {
-	if ((e->pts1 = (int*)ft_memalloc(sizeof(int) * 3)) == NULL)
-		ft_mallerr();
-	if ((e->pts2 = (int*)ft_memalloc(sizeof(int) * 3)) == NULL)
-		ft_mallerr();
 	ft_update_img(e, draw_map);
-	free(e->pts1);
-	free(e->pts2);
 	return (0);
 }
 
@@ -47,10 +41,10 @@ int		key_hook(int keycode, t_env *e)
 	ft_translate_map(keycode, e);
 	if (keycode == 45 || keycode == 65453)
 		if (e->ecart > 0)
-			e->ecart -= 1;
+			e->ecart *= 0.9;
 	if (keycode == 61 || keycode == 65451)
 		if (e->ecart >= 0)
-			e->ecart += 1;
+			e->ecart *= 1.1;
 	if (keycode == 65365 || keycode == 108)
 		e->scale += 0.1;
 	if (keycode == 65366 || keycode == 59)
@@ -63,7 +57,7 @@ int 	main(int ac, char **av, char **ev)
 {
 	t_env	*e;
 
-	if (ev)
+	if (!ev[0])
 		return (0);
 	if (ac > 2)
 	{

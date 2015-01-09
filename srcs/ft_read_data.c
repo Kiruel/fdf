@@ -34,10 +34,7 @@ static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 	while (value[i])
 	{
 		if (ft_isalpha((int)*value[i]))
-		{
-			ft_putendl_fd("Error: Map error.", 2);
-			exit(0);
-		}
+			ft_map_error();
 		i++;
 	}
 	i = ft_map_width(value);
@@ -56,6 +53,9 @@ static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 		free(value[ret->x]);
 		width++;
 	}
+	if (ret->size_line > 0)
+		if (ret->size_line != width)
+			ft_map_error();
 	ret->size_line = width;
 	free(value);
 	return (i ? line : NULL);
