@@ -25,24 +25,17 @@ static int		ft_map_width(char **value)
 static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 {
 	t_data		**line;
-	int			i;
 	int			width;
 	char		**value;
 
 	value = ft_strsplit(buf, ' ');
-	i = 0;
-	while (value[i])
-	{
-		if (ft_isalpha((int)*value[i]))
-			ft_map_error();
-		i++;
-	}
-	i = ft_map_width(value);
+	ft_map_error2(value);
 	ret->x = -1;
 	width = 0;
-	if ((line = (t_data**)ft_memalloc(sizeof(t_data*) * i + 1)) == NULL)
+	if ((line = (t_data**)ft_memalloc(sizeof(t_data*) *
+		ft_map_width(value) + 1)) == NULL)
 		ft_mallerr();
-	while (++ret->x < i)
+	while (++ret->x < ft_map_width(value))
 	{
 		if ((line[ret->x] = (t_data*)ft_memalloc(sizeof(t_data))) == NULL)
 			ft_mallerr();
@@ -53,12 +46,9 @@ static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 		free(value[ret->x]);
 		width++;
 	}
-	if (ret->size_line > 0)
-		if (ret->size_line != width)
-			ft_map_error();
-	ret->size_line = width;
+	ft_map_error3(ret, width);
 	free(value);
-	return (i ? line : NULL);
+	return (ft_map_width(value) ? line : NULL);
 }
 
 static int		ft_map_height(char *file)

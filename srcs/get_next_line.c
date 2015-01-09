@@ -9,6 +9,7 @@
 /*   Updated: 2014/11/19 15:18:04 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 
 t_lst				*get_buff_fd(int fd, t_lst *list)

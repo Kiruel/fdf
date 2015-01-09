@@ -6,7 +6,7 @@
 /*   By: etheodor <etheodor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:40:39 by etheodor          #+#    #+#             */
-/*   Updated: 2015/01/08 15:19:37 by etheodor         ###   ########.fr       */
+/*   Updated: 2015/01/09 15:00:21 by etheodor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,16 @@ int		key_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int 	main(int ac, char **av, char **ev)
+int		main(int ac, char **av, char **ev)
 {
 	t_env	*e;
+	int		i;
 
+	i = 0;
 	if (!ev[0])
 		return (0);
-	if (ac > 2)
-	{
-		ft_putstr_fd("Error: Too many argument.\n", 2);
+	if ((i = ft_error_arg(ac)) == -1)
 		return (0);
-	}
-	if (ac < 2)
-	{
-		ft_putstr_fd("Missing args after binary.", 2);
-		ft_putchar('\n');
-		return (0);
-	}
 	if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
 		ft_mallerr();
 	if ((e->v = (int*)ft_memalloc(sizeof(int) * 10)) == NULL)

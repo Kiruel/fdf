@@ -24,7 +24,8 @@ SOURCE = ./srcs/main.c \
 	./srcs/ft_translate.c \
 	./srcs/ft_error.c \
 	./srcs/ft_print_map.c \
-	./srcs/ft_mlx_tools.c
+	./srcs/ft_mlx_tools.c \
+	./srcs/ft_error2.c
 
 POINTO = main.o \
 	get_next_line.o \
@@ -32,7 +33,8 @@ POINTO = main.o \
 	ft_translate.o \
 	ft_error.o \
 	ft_print_map.o \
-	ft_mlx_tools.o
+	ft_mlx_tools.o \
+	ft_error2.o
 
 all: $(NAME)
 	@echo "all: OK"

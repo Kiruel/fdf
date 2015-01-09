@@ -13,36 +13,33 @@
 #include "fdf.h"
 #define VALEUR_T	3
 
-void	ft_translate2(t_env *e, int i, int j, int a, int b)
+void	ft_translate2(t_env *e, int a, int b)
 {
 	if (a == 0 && b == 0)
-		e->map[i][j]->x += VALEUR_T;
+		e->map[e->k][e->l]->x += VALEUR_T;
 	if (a == 0 && b == 1)
-		e->map[i][j]->x -= VALEUR_T;
+		e->map[e->k][e->l]->x -= VALEUR_T;
 	if (a == 1 && b == 0)
-		e->map[i][j]->y -= VALEUR_T;
+		e->map[e->k][e->l]->y -= VALEUR_T;
 	if (a == 1 && b == 1)
-		e->map[i][j]->y += VALEUR_T;
+		e->map[e->k][e->l]->y += VALEUR_T;
 }
 
 void	ft_translate(t_env *e, int a, int b)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < e->size)
+	e->k = 0;
+	e->l = 0;
+	while (e->k < e->size)
 	{
-		if (e->map[i])
+		if (e->map[e->k])
 		{
-			j = 0;
-			while (e->map[i][j])
+			e->l = 0;
+			while (e->map[e->k][e->l])
 			{
-				ft_translate2(e, i, j, a, b);
-				j++;
-			}			
+				ft_translate2(e, a, b);
+				e->l++;
+			}
 		}
-		i++;
+		e->k++;
 	}
 }
