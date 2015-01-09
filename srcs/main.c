@@ -26,8 +26,10 @@ void	ft_translate_map(int keycode, t_env *e)
 
 int		expose_hook(t_env *e)
 {
-	e->pts1 = (int*)ft_memalloc(sizeof(int) * 3);
-	e->pts2 = (int*)ft_memalloc(sizeof(int) * 3);
+	if ((e->pts1 = (int*)ft_memalloc(sizeof(int) * 3)) == NULL)
+		ft_mallerr();
+	if ((e->pts2 = (int*)ft_memalloc(sizeof(int) * 3)) == NULL)
+		ft_mallerr();
 	ft_update_img(e, draw_map);
 	free(e->pts1);
 	free(e->pts2);
@@ -57,16 +59,17 @@ int		key_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int 	main(int ac, char **av)
+int 	main(int ac, char **av, char **ev)
 {
 	t_env	*e;
-	int 	*size;
 
-	size = (int*)ft_memalloc(sizeof(int) * 2);
-	size[0] = DEFAUT_X;
-	size[1] = DEFAUT_Y;
-	if (ac > 2)
+	if (ev)
 		return (0);
+	if (ac > 2)
+	{
+		ft_putstr_fd("Error: Too many argument.\n", 2);
+		return (0);
+	}
 	if (ac < 2)
 	{
 		ft_putstr_fd("Missing args after binary.", 2);
@@ -75,11 +78,11 @@ int 	main(int ac, char **av)
 	}
 	if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
 		ft_mallerr();
-	e->v = (int*)ft_memalloc(sizeof(int) * 10);
+	if ((e->v = (int*)ft_memalloc(sizeof(int) * 10)) == NULL)
+		ft_mallerr();
 	ft_read_data(av[1], e);
 	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, size[0], size[1], "fdf");
-	free(size);
+	e->win = mlx_new_window(e->mlx, DEFAUT_X, DEFAUT_Y, "fdf");
 	e->ecart = 20;
 	e->scale = 0.1;
 	mlx_hook(e->win, 2, 3, key_hook, e);

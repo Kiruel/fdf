@@ -30,6 +30,16 @@ static t_data	**ft_add_entry(char *buf, int y, t_env *ret)
 	char		**value;
 
 	value = ft_strsplit(buf, ' ');
+	i = 0;
+	while (value[i])
+	{
+		if (ft_isalpha((int)*value[i]))
+		{
+			ft_putendl_fd("Error: Map error.", 2);
+			exit(0);
+		}
+		i++;
+	}
 	i = ft_map_width(value);
 	ret->x = -1;
 	width = 0;
